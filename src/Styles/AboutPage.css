@@ -1,0 +1,13 @@
+html,
+body {
+	margin: 0;
+  font-family: arial,helvetica;
+  padding-top:10px;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
