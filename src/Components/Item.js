@@ -23,9 +23,7 @@ export class Item extends React.Component{
         this.setState({
           first_name:data.first_name
         });
-      }
-
-
+      });
     }
     render(){
       const bookButtonAttr={
@@ -34,7 +32,7 @@ export class Item extends React.Component{
       }
       const bookButtonLabel="Book";
     //  const {...props} = this.props;
-      let data = {pathname: '/details', id: this.props.id }
+      let data = {pathname: '/details', id: this.props.id}
 
         return(
 
@@ -45,7 +43,7 @@ export class Item extends React.Component{
             </MDBRow>
             <MDBRow className="item-info">
               <MDBCol size="sm">
-                <h1> hi</h1>
+                <h1>hi</h1>
               </MDBCol>
               <MDBCol size="sm" className="item-points">
                   <Point id = "item-point" dataDisplay={this.props.location.address} gIcon = "glyphicon-map-marker"/>

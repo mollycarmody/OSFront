@@ -22,7 +22,7 @@ export class Table extends React.Component{
     // }
 
     render(){
-      const tableInfo = this.props.dataPoints.map((rowPoint) =>
+      const tableInfo = this.props.dataPoints.map((rowPoint, index) =>
           <Item {...rowPoint} />
       );
         return(
@@ -30,7 +30,7 @@ export class Table extends React.Component{
 
 
     					<ul className="list-group">{tableInfo}</ul>
-        
+
 
 
 

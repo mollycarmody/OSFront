@@ -1,0 +1,44 @@
+
+.howitworks-row, .howitworks-container{
+  max-width:100%;
+  margin:0;
+}
+* {
+  margin: 0px;
+}
+
+.howitworks-container{
+  text-align: center;
+}
+
+.toggleinfo-content{
+  text-align: left;
+  padding-top:40px;
+}
+.toggleinfo-titleIcon{
+width: auto;
+padding-bottom: 10px;
+}
+
+.howitworks-jumbotron{
+  background-color: transparent;
+  border-radius: 25px;
+  color:white;
+  margin-left: 25%;
+
+  height:100%;
+  width:50%;
+
+}
+.toggleinfo-icon, .toggleinfo-title{
+  text-align: center;
+
+  color:white;
+  font-size: 4vw;
+}
+#icon{
+  color:darkblue;
+}
+.toggleinfo-main{
+  width: 100%;
+}

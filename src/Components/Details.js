@@ -4,16 +4,40 @@ import MainNav from './MainNav.js';
 import { MDBCol, MDBRow, MDBContainer, MDBBtn } from "mdbreact";
 import Info from './Info.js';
 import TitlePara from './TitlePara.js';
+
+import * as Api from '../apiActions.js';
+
 import "../Styles/Details.css";
 
 export class Details extends React.Component{
   constructor(props){
     super(props);
-    this.state = { width: window.innerWidth, height: window.innerHeight, id:this.props.location.id };
+    this.state = {
+      width: window.innerWidth,
+      height: window.innerHeight,
+      id:this.props.location.id,
+      listingInfo:[],
+      first_name:''
+    };
   this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 }
 
 componentDidMount() {
+  console.log("id is" + JSON.stringify(this.props.location.id));
+  Api.Listings.get({id: this.props.location.id}, listData=>{
+      console.log(listData);
+      this.setState({
+        listingInfo:listData
+      });
+      Api.Users.get({username: listData.host}, userData=>{
+        console.log("this is first name" + userData.first_name);
+        this.setState({
+          first_name:userData.first_name
+        });
+      });
+  });
+  console.log("props location is" + JSON.stringify(this.props.location));
+
   this.updateWindowDimensions();
   window.addEventListener('resize', this.updateWindowDimensions);
 }
@@ -78,9 +102,11 @@ updateWindowDimensions() {
   };
 
   const listingAbout = {
-    title: listingInfo.firstName + "\'s Place",
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam viverra justo vitae turpis dignissim vehicula. Vivamus vitae faucibus nisi, non pretium leo. Ut vitae nulla urna. Praesent suscipit ipsum et eros mollis suscipit vitae a quam. Proin ut vulputate odio. Phasellus varius risus ac interdum iaculis. Sed odio est, lobortis at mauris a, pretium commodo nulla. Aliquam fringilla lobortis sapien vitae pellentesque. Vestibulum venenatis nibh nec purus maximus, et mattis quam tincidunt. Sed velit dolor, tempor vitae nibh a, lacinia tempor sem. Morbi justo nisl, euismod bibendum lacus sit amet, eleifend imperdiet sapien. Curabitur eleifend tristique dolor sit amet hendrerit'
+    title: this.state.first_name + "\'s Place",
+    content: this.state.listingInfo.description
   };
+console.log("listing info" + this.state.listingInfo);
+
 
     return(
       <div className="Details-main">
@@ -108,7 +134,7 @@ updateWindowDimensions() {
         <MDBCol size="sm">
           <div className="Details-info">
             <h3>Specifics</h3>
-            <Info {...listingInfo}/>
+            <Info {...this.state.listingInfo}/>
           </div>
         </MDBCol>
         <MDBCol size="sm">

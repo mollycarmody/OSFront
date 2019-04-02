@@ -1,12 +1,33 @@
 import React from 'react';
 import TitlePara from './TitlePara.js';
 import { MDBContainer, MDBRow, MDBCol, MDBFormInline, MDBIcon, MDBBtn } from "mdbreact";
+import Popup from './Popup.js';
+import Member from './Member.js';
 import '../Styles/MeetTeam.css';
 export class MeetTeam extends React.Component{
   constructor(props){
     super(props);
-  }
+    this.state={
+      showPopup:false,
+      clickedMember: []
+    };
+    this.handleClick = this.handleClick.bind(this);
+    this.popUpToggle = this.popUpToggle.bind(this);
 
+  }
+  handleClick(member){
+    this.setState({
+      showPopup:true,
+      clickedMember: member
+    });
+    console.log(this.state.showPopup);
+  }
+  popUpToggle(){
+    this.setState({
+      showPopup:!this.state.showPopup
+    });
+        console.log(this.state.showPopup);
+  }
   render(){
     const members = [
       {
@@ -42,27 +63,33 @@ export class MeetTeam extends React.Component{
 
 
     ]
-    const team = members.map((member) =>
-        <MDBRow className="member">
-          <MDBCol sm="4" className="memberPic">
-            <img className="img-fluid"src={member.picSrc}/>
-          </MDBCol>
-          <MDBCol sm="8" className="memberDescription">
-            <TitlePara title ={member.name} content={member.bio}/>
-          </MDBCol>
-        </MDBRow>
+    const team = members.map((member, index) =>
+        // <MDBRow className="member">
+        //   <MDBCol sm="4" className="memberPic">
+        //     <img className="img-fluid"src={member.picSrc}/>
+        //   </MDBCol>
+        //   <MDBCol sm="8" className="memberDescription">
+        //     <TitlePara title ={member.name} content={member.bio}/>
+        //   </MDBCol>
+        // </MDBRow>
 
+        <div onClick={()=>this.handleClick(member)}>
+          <Member {...member}/>
+        </div>
     );
     return(
       <div className = "meetTeam-main">
-        <div className="meetTeam-header">
-          <h1>Meet the Team</h1>
-        </div>
+
+        <Popup show={this.state.showPopup} handleToggle={this.popUpToggle} member={this.state.clickedMember} />
+
         <div className = "meetTeam-content">
           <MDBContainer>
-            {team}
+            <MDBRow className="meetTeam-row">
+              {team}
+            </MDBRow>
           </MDBContainer>
         </div>
+
       </div>
     );
   }

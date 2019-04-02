@@ -1,0 +1,36 @@
+
+
+.contactpage-title, .contactpage-submit{
+  text-align: center;
+}
+.contactpage-main{
+
+}
+#form{
+  display:inline;
+}
+#title{
+  text-align: center;
+  display:inline;
+}
+.contactpage-content{
+  height: 100%;
+  width: 100%;
+
+}
+
+#contactpage-container{
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left:auto;
+  margin-right: auto;
+
+}
+@media (min-width:768px) {
+  #contactpage-container{
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 700px;
+
+  }
+}

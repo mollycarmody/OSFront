@@ -3,3 +3,33 @@
   padding-bottom: 10px;
   border-bottom: 1px solid #ccc;
 }
+.memberPic{
+  border-radius: 50%;
+  width: 20vw;
+  height: 20vw;
+  border: 2px solid #02018d;
+
+}
+.memberMask{
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20vw;
+  height: 20vw;
+}
+
+
+.memberName, .memberTitle{
+  text-align: center;
+}
+.memberName{
+  font-size: 2vw;
+}
+
+.meetTeam-header{
+  text-align: center;
+  font-size: 4vw;
+  color:#4d62ae;
+}
+.meetTeam-row{
+  width:100vw;
+}

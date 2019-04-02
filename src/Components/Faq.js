@@ -1,5 +1,10 @@
 import React from 'react';
 import TitlePara from './TitlePara.js';
+import MainNav from './MainNav.js';
+import Footer from './Footer.js';
+import { MDBNavLink, MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+
+import '../Styles/Faq.css';
 
 export class Faq extends React.Component{
   constructor(props){
@@ -31,12 +36,23 @@ export class Faq extends React.Component{
 
     return(
       <div className = "faq-main">
-        <div className = "faq-title">
-          <h1>Frequently Asked Questions</h1>
+        <div className = "faq-nav">
+          <MainNav/>
         </div>
         <div className = "faq-content">
-          {qaElements}
+          <MDBContainer>
+            <div className = "faq-title">
+              <h1>Frequently Asked Questions</h1>
+            </div>
+            <div className = "faq-content">
+              {qaElements}
+            </div>
+          </MDBContainer>
         </div>
+
+        <footer>
+          <Footer/>
+        </footer>
       </div>
     );
   }

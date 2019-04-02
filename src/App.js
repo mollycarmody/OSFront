@@ -8,6 +8,9 @@ import HostForm from './Components/HostForm.js';
 import FirstPage from './Components/FirstPage.js';
 import Details from './Components/Details.js';
 import AboutPage from './Components/AboutPage.js';
+import Faq from './Components/Faq.js';
+import ContactPage from './Components/ContactPage.js';
+import TermsCond from './Components/TermsCond.js';
 
 import {
   BrowserRouter,
@@ -31,7 +34,10 @@ class App extends Component{
                   <Route path="/BecomeAHost" component={HostForm}/>
                   <Route path="/Listing" component={Listing}/>
                   <Route path="/Details" component={Details}/>
-                  <Route path="/About" component={AboutPage}/>
+                  <Route path="/AboutUs" component={AboutPage}/>
+                  <Route path="/TermsConditions" component={TermsCond}/>
+                  <Route path="/Contact" component={ContactPage}/>
+                  <Route path="/Faq" component={Faq}/>
                 </div>
           </BrowserRouter>
         );

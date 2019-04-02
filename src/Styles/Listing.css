@@ -1,3 +1,7 @@
 #row-bookButton{
   background-color: #4F1FDE
 }
+.listing-row{
+  width: 100vw;
+  margin: 0;
+}

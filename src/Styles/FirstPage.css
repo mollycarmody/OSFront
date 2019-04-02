@@ -27,8 +27,8 @@ text-transform: none
 
 }
 .firstpage-socialIcons, .firstpage-search{
-  display: block;
-  position: absolute;
+  /* display: block;
+  position: absolute; */
   margin: 0 auto;
 
   text-align: center;
@@ -50,4 +50,116 @@ text-transform: none
 
 #searchCol{
     display: inline-block;
+}
+
+.section{
+
+
+  height: 100vh;
+  display: inline-block;
+
+}
+.section-overall{
+  position: relative;
+  text-align: center;
+}
+.text-overimage{
+  /* position:absolute;
+  top:50%; */
+}
+.box-image{
+  width: 800px;
+  height: 500px;
+}
+#firstpage-input{
+  margin:auto;
+}
+.title{
+  /* position: absolute; */
+  width: 100%;
+  text-align: center;
+}
+#howWorks-image{
+  width:90%;
+}
+#howWorks-title{
+  top:45%;
+  left:-2%;
+}
+#section1{
+  width: 100%;
+  height:60vh;
+
+}
+.navbar {
+        box-shadow: none;
+    }
+
+#section2,#section3,#section4,#section5, #section7{
+background-size: contain;
+ background-repeat: no-repeat;
+ width: 100%;
+ height: 0;
+ padding-top: 56.25%;
+ background-color: #4d62ae;
+
+}
+
+ #section2{
+  /* width: 100%;
+  max-width: 1920px;
+  background:url('/section2.png') no-repeat;
+   background-size: 100%; */
+  background-image:url('/section2.png');
+
+}
+#section3{
+   background-image:url('/section3.png');
+}
+/* #section4{
+   background-image:url('/section4.png');
+} */
+#section5{
+   background-image:url('/section5.png');
+}
+#section6{
+
+  background-image:url('/purpleBackground.png');
+  width: 100%;
+  height:auto;
+}
+#section7{
+  background-image:url('/team.png');
+
+}
+#section8{
+  width: 100%;
+  height:auto;
+}
+
+footer.page-footer a{
+  color: #4d62ae;
+}
+
+.firstpage-footer{
+  padding-top:10px;
+  height: 8vh;
+  font-size:1vw;
+  width:100vw;
+
+
+}
+.footer-col{
+text-align: center;
+}
+
+@media (min-width: 562px){
+.meetTeam-main{
+    padding-top:10px;
+    height: 8vh;
+    font-size:1vw;
+    text-align: center;
+    width:562px;
+    margin:0;
+  }
 }

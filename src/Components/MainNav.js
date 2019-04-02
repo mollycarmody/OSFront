@@ -45,6 +45,7 @@ export class MainNav extends React.Component{
   //   </div>
   // </nav>
   handleLogin(){
+    window.location = "https://vcm-8728.vm.duke.edu:8888/login";
     this.setState({isLoggedIn: !this.state.isLoggedIn});
   }
   handleClick(){
@@ -106,7 +107,7 @@ console.log(this.state.width);
       <div>
       <header className="mainNav-header">
 
-         <MDBNavbar color="white" dark expand="md" scrolling >
+         <MDBNavbar color="transparent" expand="md" scrolling transparent>
            <NavLink to="/">
             <img className="navbar-brand" src="/OpenSpaceRevised.png" alt="OpenSpaceRevised"/>
            </NavLink>
@@ -121,7 +122,7 @@ console.log(this.state.width);
               </MDBNavItem>
 
                <MDBNavItem>
-               {!this.state.isLoggedIn && <MDBNavLink to="/login" onClick={this.handleLogin}>Login with Facebook </MDBNavLink>}
+               {!this.state.isLoggedIn && <MDBNavLink to="/" onClick = {this.handleLogin}>Login with Facebook </MDBNavLink>}
                {this.state.isLoggedIn && <MDBNavLink to="/logout" onClick = {this.handleLogin}>Logout </MDBNavLink>}
                </MDBNavItem>
 

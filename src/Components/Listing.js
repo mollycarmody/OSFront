@@ -32,7 +32,7 @@ export class Listing extends Component{
       data: []
     };
   }
-
+//put fitlers in brackets as from_plade_id: "string", from_radis:"8"
   componentDidMount(){
     Api.Listings.all({},
       data=>{
@@ -116,12 +116,12 @@ export class Listing extends Component{
 
 
         <div className ="listing-content">
-          <MDBRow>
+          <MDBRow className="listing-row">
             <MDBCol size="sm">
-              <Table dataPoints={data}/>
+              <Table dataPoints={this.state.data}/>
             </MDBCol>
             <MDBCol size="sm">
-              <Map/>
+              <Map data={this.state.data}/>
             </MDBCol>
           </MDBRow>
 

@@ -1,0 +1,26 @@
+.faq-title{
+  text-align: center;
+  font-size:
+}
+.faq-content{
+  height: 100vh;
+}
+.tp-title{
+  font-size: 4vw;
+  font-weight: bold;
+}
+.tp-content{
+  font-size: 2vw;
+}
+
+.tp-main{
+  padding-bottom: 20px;
+}
+@media (min-width:500px) {
+  .tp-title{
+    font-size: 16px;
+  }
+  .tp-content{
+    font-size: 12px;
+  }
+}
