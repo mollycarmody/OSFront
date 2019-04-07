@@ -15,7 +15,7 @@ export class Details extends React.Component{
     this.state = {
       width: window.innerWidth,
       height: window.innerHeight,
-      id:this.props.location.id,
+      listingInfo: null,
       listingInfo:[],
       first_name:''
     };
@@ -23,8 +23,8 @@ export class Details extends React.Component{
 }
 
 componentDidMount() {
-  console.log("id is" + JSON.stringify(this.props.location.id));
-  Api.Listings.get({id: this.props.location.id}, listData=>{
+  console.log("id is" + JSON.stringify(this.props.match.id));
+  Api.Listings.get({id: this.props.match.id}, listData=>{
       console.log(listData);
       this.setState({
         listingInfo:listData
@@ -36,7 +36,6 @@ componentDidMount() {
         });
       });
   });
-  console.log("props location is" + JSON.stringify(this.props.location));
 
   this.updateWindowDimensions();
   window.addEventListener('resize', this.updateWindowDimensions);
