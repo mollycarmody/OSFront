@@ -20,6 +20,7 @@ import {
   NavLink,
   HashRouter
 } from "react-router-dom";
+import AboutPage from "./Components/AboutPage";
 class App extends Component{
 
     constructor(props){
@@ -57,11 +58,11 @@ class App extends Component{
 
           <BrowserRouter>
                 <div className="content">
-
                   <Route exact path="/" component={FirstPage}/>
                   <Route path="/BecomeAHost" component={HostForm}/>
                   <Route path="/Listing" component={Listing}/>
                   <Route path="/Details/:id" component={Details}/>
+                  <Route path="/AboutUs" component={AboutPage}/>
                   <Route path="/MeetTheTeam" component={TeamPage}/>
                   <Route path="/TermsConditions" component={TermsCond}/>
                   <Route path="/Contact" component={ContactPage}/>

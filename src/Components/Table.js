@@ -2,9 +2,8 @@ import React from 'react';
 import Item from './Item.js';
 
 
-
-export class Table extends React.Component{
-    constructor(props){
+export class Table extends React.Component {
+    constructor(props) {
         super(props);
         // this.state = {
         //     numRums:0;
@@ -21,23 +20,20 @@ export class Table extends React.Component{
     //   <Col colData={this.props.hostDataPoint}/>
     // }
 
-    render(){
-      const tableInfo = this.props.dataPoints.map((rowPoint, index) =>
-          <Item {...rowPoint} />
-      );
-        return(
-
-
-
-    					<ul className="list-group">{tableInfo}</ul>
-
-
-
-
-      );
+    render() {
+        if (!this.props.dataPoints || this.props.dataPoints.length === 0) {
+            return <div>OpenSpace listings were not found in this area. Maybe try another?</div>
+        }
+        const tableInfo = this.props.dataPoints.map((rowPoint, index) =>
+            <Item {...rowPoint} />
+        );
+        return (
+            <ul className="list-group">{tableInfo}</ul>
+        );
 
     }
 
 
 }
+
 export default Table;

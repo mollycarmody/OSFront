@@ -22,8 +22,8 @@ export class Details extends React.Component{
 }
 
 componentDidMount() {
-  console.log("id is" + JSON.stringify(this.props.match.id));
-  Api.Listings.get({id: this.props.match.id}, listData=>{
+  console.log("id is" + JSON.stringify(this.props.match.params.id));
+  Api.Listings.get({id: this.props.match.params.id}, listData=>{
       console.log(listData);
       this.setState({
         listingInfo:listData

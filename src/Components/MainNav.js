@@ -115,8 +115,6 @@ console.log("new nav");
 // googleMapURL= "https://maps.googleapis.com/maps/api/js?key=AIzaSyDbGXFv-QOejj2G8vfGj5cIuYqXjI1AhRU&"
 // />
 console.log(this.state.width);
-// {this.props.showSearch && <SearchForm value = {this.props.searchVal.searchVal} formAttr = {searchFormAttr} inputAttr={searchInputAttr} buttAttr={searchButtonAttr} searchButtonLabel={searchButtonLabel}/>}
-
 //  <SearchForm formAttr = {searchFormAttr} inputAttr={searchInputAttr} buttAttr={searchButtonAttr} searchButtonLabel={searchButtonLabel}/>
     return(
       <div>
@@ -126,8 +124,6 @@ console.log(this.state.width);
            <NavLink to="/">
             <img className="navbar-brand" src="/OpenSpaceRevised.png" alt="OpenSpaceRevised"/>
            </NavLink>
-
-
            {this.state.width<767 && <CustomToggler handleClick={this.handleClick} />}
            <MDBCollapse isOpen={this.state.collapse} navbar>
              <MDBNavbarNav left>
@@ -135,7 +131,7 @@ console.log(this.state.width);
               <MDBNavItem>
 
               </MDBNavItem>
-
+                 {/*{this.props.showSearch && <SearchForm value = {this.props.searchVal.searchVal} formAttr = {searchFormAttr} inputAttr={searchInputAttr} buttAttr={searchButtonAttr} searchButtonLabel={searchButtonLabel}/>}*/}
                <MDBNavItem>
                {!this.state.isLoggedIn && <MDBNavLink to="/" onClick = {this.handleLogin}>Login with Facebook </MDBNavLink>}
                {this.state.isLoggedIn && <MDBNavLink to="/logout" onClick = {this.handleLogin}>Logout </MDBNavLink>}

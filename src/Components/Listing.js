@@ -13,6 +13,7 @@ import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import Fullpage, { FullPageSections, FullpageSection } from 'react-fullpage';
 
 import * as Api from '../apiActions.js';
+import * as API from "../apiActions";
 
 // import Main from './Main.js';
 // import PracticeNewPage from './Components/PracticeNewPage.js';
@@ -43,6 +44,24 @@ export class Listing extends Component{
       }
     );
   }
+
+  searchForListings(placeId, radius, transportationMode, startDate, endDate){
+      API.Listings.all({
+          from_place_id: placeId,
+          radius: radius,
+          start_date: startDate,
+          end_date: endDate,
+          transportation_mode: transportationMode
+      }, response => {
+          console.log("Search Query: " + placeId)
+          console.log("Search Results:\n")
+          console.log(response)
+          this.setState({
+              data: response
+          })
+      })
+  }
+
     render() {
 
       const hosts = [
@@ -121,7 +140,7 @@ export class Listing extends Component{
               <Table dataPoints={this.state.data}/>
             </MDBCol>
             <MDBCol size="sm">
-              <Map data={this.state.data}/>
+              <Map data={this.state.data} onPlaceSearched={(placeId) => this.searchForListings(placeId, 1200, 'driving', null, null)}/>
             </MDBCol>
           </MDBRow>
 

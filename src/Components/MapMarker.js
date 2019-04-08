@@ -24,15 +24,24 @@ export class MapMarker extends React.Component {
             >
                 {console.log(this.state.infoBoxIsOpen)}
                 {this.state.infoBoxIsOpen &&
-              <InfoWindow
+                <InfoWindow
                     onCloseClick={() =>
                         this.setState({
                             infoBoxIsOpen: false
                         })}
                     options={{closeBoxURL: ``, enableEventPropagation: true}}
                 >
+
                     <div>
-                        Hello World
+                        <div>
+                            {this.props.listing.location.name}
+                        </div>
+                        <div>
+                            {this.props.listing.space_type}
+                        </div>
+                        <div>
+                            {this.props.listing.location.address}
+                        </div>
                     </div>
                 </InfoWindow>
                 }
@@ -40,4 +49,5 @@ export class MapMarker extends React.Component {
         )
     }
 }
+
 export default MapMarker;

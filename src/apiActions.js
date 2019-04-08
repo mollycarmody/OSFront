@@ -1,122 +1,94 @@
-import axiosRestClient from 'axios-rest-client'
+import axios from 'axios'
 
-const API_BASE_URL = 'https://vcm-8728.vm.duke.edu:8888/api/'
-
-const api = axiosRestClient({
-    baseUrl: API_BASE_URL
-});
-
-//example callback: data => console.log(data)
-
-//example usage: actions.Listings.all(params, data => console.log(data)}
+const API_BASE_URL = 'https://vcm-8728.vm.duke.edu:8888/api/';
 
 function handleResponse(response, callback) {
-    return response.isSuccessful ? callback(response.data) : console.log(response)
+    return response.data ? callback(response.data) : console.error(response)
 }
 
 export const Users = {
     me: (callback) =>
-        api.me
-            .all()
+        axios.get(API_BASE_URL + 'me/')
             .then(response => handleResponse(response, callback)),
     all: (params, callback) =>
-        api.users
-            .all()
+        axios.get(API_BASE_URL + 'users/')
             .then(response => handleResponse(response, callback)),
     get: ({username}, callback) =>
-        api.users
-            .find(username)
+        axios.get(API_BASE_URL + 'users/' + username + '/')
             .then(response => handleResponse(response, callback)),
     update: ({username, ...rest}, callback) =>
-        api.users[username]
+        axios.post(API_BASE_URL + 'users/' + username + '/', {...rest})
             .post(rest)
             .then(response => handleResponse(response, callback)),
     delete: ({username}, callback) =>
-        api.users
+        axios.delete(API_BASE_URL + 'users/' + username + '/')
             .delete(username)
             .then(response => handleResponse(response, callback))
 }
 
 export const Hosts = {
     all: (params, callback) =>
-        api.hosts
-            .all(params)
+        axios.get(API_BASE_URL + 'hosts/', {params})
             .then(response => handleResponse(response, callback)),
-    get: (username, callback) =>
-        api.hosts
-            .find(username)
+    get: ({username}, callback) =>
+        axios.get(API_BASE_URL + 'hosts/' + username + '/')
             .then(response => handleResponse(response, callback)),
     become: (callback) =>
-        api.hosts
-            .post({})
+        axios.post(API_BASE_URL + 'hosts/', {})
             .then(response => handleResponse(response, callback)),
     delete: ({username}, callback) =>
-        api.hosts
+        axios.delete(API_BASE_URL + 'hosts/' + username + '/')
             .delete(username)
             .then(response => handleResponse(response, callback))
 }
 
 export const Locations = {
     all: (params, callback) =>
-        api.locations
-            .all(params)
+        axios.get(API_BASE_URL + 'locations/', {params})
             .then(response => handleResponse(response, callback)),
     get: ({google_place_id}, callback) =>
-        api.locations
-            .find(google_place_id)
+        axios.get(API_BASE_URL + 'locations/' + google_place_id + '/')
             .then(response => handleResponse(response, callback)),
     create: (data, callback) =>
-        api.locations
-            .create(data)
+        axios.post(API_BASE_URL + 'locations/', data)
             .then(response => handleResponse(response, callback)),
 }
 
 export const Listings = {
     all: (params, callback) =>
-        api.listings
-            .all(params)
+        axios.get(API_BASE_URL + 'listings/', {params})
             .then(response => handleResponse(response, callback)),
     get: ({id}, callback) =>
-        api.listings
-            .find(id)
+        axios.get(API_BASE_URL + 'listings/' + id + '/')
             .then(response => handleResponse(response, callback)),
     create: (data, callback) =>
-        api.listings
-            .create(data)
+        axios.post(API_BASE_URL + 'listings/', data)
             .then(response => handleResponse(response, callback)),
-    update: (data, callback) =>
-        api.listings
-            .update(data)
+    update: ({id, ...rest}, callback) =>
+        axios.post(API_BASE_URL + 'listings/' + id + '/', rest)
             .then(response => handleResponse(response, callback)),
     delete: ({id}, callback) =>
-        api.listings
-            .delete(id)
+        axios.delete(API_BASE_URL + 'listings/' + id)
             .then(response => handleResponse(response, callback))
 }
 
 export const Bookings = {
     all: (params, callback) =>
-        api.bookings
-            .all(params)
+        axios.get('bookings/')
             .then(response => handleResponse(response, callback)),
     get: ({id}, callback) =>
-        api.bookings
-            .find(id)
+        axios.get('bookings/' + id + '/')
             .then(response => handleResponse(response, callback)),
     create: (data, callback) =>
-        api.bookings
-            .create(data)
+        axios.post('bookings/', data)
             .then(response => handleResponse(response, callback)),
     update: ({id, ...rest}, callback) =>
-        api.bookings[id]
-            .post(rest)
+        axios.post('bookings/' + id + '/', rest)
             .then(response => handleResponse(response, callback)),
     delete: ({id}, callback) =>
-        api.bookings
-            .delete(id)
+        axios.delete('bookings/' + id + '/')
             .then(response => handleResponse(response, callback)),
     confirm: ({id}, callback) =>
-        api.bookings[id]
-            .post({confirmed: true})
+        axios.post('bookings/', {confirmed: true})
             .then(response => handleResponse(response, callback))
 }
