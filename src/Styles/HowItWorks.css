@@ -6,6 +6,9 @@
 * {
   margin: 0px;
 }
+.toggleinfo-title{
+  text-align: center;
+}
 
 .howitworks-container{
   text-align: center;

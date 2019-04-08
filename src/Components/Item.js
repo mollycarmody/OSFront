@@ -31,7 +31,6 @@ export class Item extends React.Component{
         'class':"btn btn-primary"
       }
       const bookButtonLabel="Book";
-    //  const {...props} = this.props;
       let data = {pathname: '/details/' + this.props.id}
 
         return(

@@ -96,12 +96,9 @@ crossOrigin="anonymous"/>
   <Section className="section" id="section6">
     <HowItWorks/>
   </Section>
-  <Section className="section" id="section7">
-  </Section>
 
-  <Section className="section" id="section8">
-    <MeetTeam/>
-  </Section>
+
+
 
 
 

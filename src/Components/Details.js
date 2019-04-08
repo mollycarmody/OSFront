@@ -1,7 +1,7 @@
 import React from 'react';
 import Gallery from 'react-grid-gallery';
 import MainNav from './MainNav.js';
-import { MDBCol, MDBRow, MDBContainer, MDBBtn } from "mdbreact";
+import { MDBCol, MDBRow, MDBContainer, MDBBtn, MDBNavLink } from "mdbreact";
 import Info from './Info.js';
 import TitlePara from './TitlePara.js';
 
@@ -15,7 +15,6 @@ export class Details extends React.Component{
     this.state = {
       width: window.innerWidth,
       height: window.innerHeight,
-      listingInfo: null,
       listingInfo:[],
       first_name:''
     };
@@ -104,6 +103,7 @@ updateWindowDimensions() {
     title: this.state.first_name + "\'s Place",
     content: this.state.listingInfo.description
   };
+  let data = {pathname: '/Book', listingInfo:this.state.listingInfo, hostFirstName: this.state.first_name }
 console.log("listing info" + this.state.listingInfo);
 
 
@@ -146,7 +146,7 @@ console.log("listing info" + this.state.listingInfo);
 
       <MDBRow >
         <div className="Details-button" >
-          <MDBBtn id="interestBttn">I'm interested!</MDBBtn>
+          <MDBNavLink to={data}><MDBBtn id="interestBttn">I'm interested!</MDBBtn></MDBNavLink>
         </div>
       </MDBRow>
       </MDBContainer>

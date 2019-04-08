@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import 'mdbreact/dist/css/mdb.css'
 import '../Styles/MainNav.css';
+import {compose, withProps} from "recompose"
+import Map from './Map.js';
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
 import CustomToggler from './CustomToggler.js';
 
 
 //import logo from './logo.svg';
 
-
+import Autocomplete from 'react-google-autocomplete';
 import Button from './Button.js';
 import Icon from './Icon.js';
 import SearchForm from './SearchForm.js';
 import HostForm1 from './HostForm1.js';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 
 export class MainNav extends React.Component{
   constructor(props){
@@ -99,8 +102,20 @@ export class MainNav extends React.Component{
       const hostLabel = "Become a Host";
 
 console.log("new nav");
-
+// <Autocomplete
+// style={{
+// width: '100%',
+// height: '40px',
+// paddingLeft: '16px',
+// marginTop: '2px',
+// marginBottom: '100px'
+// }}
+// onPlaceSelected={ this.props.handlePlaceSelected }
+// types={['(regions)']}
+// googleMapURL= "https://maps.googleapis.com/maps/api/js?key=AIzaSyDbGXFv-QOejj2G8vfGj5cIuYqXjI1AhRU&"
+// />
 console.log(this.state.width);
+// {this.props.showSearch && <SearchForm value = {this.props.searchVal.searchVal} formAttr = {searchFormAttr} inputAttr={searchInputAttr} buttAttr={searchButtonAttr} searchButtonLabel={searchButtonLabel}/>}
 
 //  <SearchForm formAttr = {searchFormAttr} inputAttr={searchInputAttr} buttAttr={searchButtonAttr} searchButtonLabel={searchButtonLabel}/>
     return(
@@ -118,7 +133,7 @@ console.log(this.state.width);
              <MDBNavbarNav left>
 
               <MDBNavItem>
-               {this.props.showSearch && <SearchForm value = {this.props.searchVal.searchVal} formAttr = {searchFormAttr} inputAttr={searchInputAttr} buttAttr={searchButtonAttr} searchButtonLabel={searchButtonLabel}/>}
+
               </MDBNavItem>
 
                <MDBNavItem>
@@ -131,7 +146,7 @@ console.log(this.state.width);
                </MDBNavItem>
 
                <MDBNavItem>
-                 <MDBNavLink to="/About">About</MDBNavLink>
+                 <MDBNavLink to="/MeetTheTeam">About</MDBNavLink>
                </MDBNavItem>
              </MDBNavbarNav>
            </MDBCollapse>

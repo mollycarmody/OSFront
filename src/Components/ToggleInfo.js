@@ -28,9 +28,9 @@ export class ToggleInfo extends React.Component{
   render(){
     return(
       <div className="toggleinfo-main">
-      <span className = "toggleinfo-titleIcon"  onClick={this.handleClick}>
-          <h1 className="toggleinfo-title">{this.props.title}</h1>
-          <i className="toggleinfo-icon" className={this.state.iconToShow}></i>
+      <span className = "toggleinfo-titleIcon">
+          <h1 className="toggleinfo-title" onClick={this.handleClick}>{this.props.title}</h1>
+          {this.props.showIcon && <i className="toggleinfo-icon" className={this.state.iconToShow} onClick={this.handleClick}></i>}
         </span>
         {this.state.hideContent &&
           <div className="toggleinfo-content">
@@ -40,5 +40,9 @@ export class ToggleInfo extends React.Component{
     );
   }
 
+}
+
+ToggleInfo.defaultProps={
+  showIcon:true
 }
 export default ToggleInfo;
