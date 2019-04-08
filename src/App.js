@@ -62,7 +62,6 @@ class App extends Component{
                   <Route path="/BecomeAHost" component={HostForm}/>
                   <Route path="/Listing" component={Listing}/>
                   <Route path="/Details/:id" component={Details}/>
-                  <Route path="/AboutUs" component={AboutPage}/>
                   <Route path="/MeetTheTeam" component={TeamPage}/>
                   <Route path="/TermsConditions" component={TermsCond}/>
                   <Route path="/Contact" component={ContactPage}/>
