@@ -1,7 +1,7 @@
 import React from 'react';
 import Gallery from 'react-grid-gallery';
 import MainNav from './MainNav.js';
-import { MDBCol, MDBRow, MDBContainer, MDBBtn } from "mdbreact";
+import { MDBCol, MDBRow, MDBContainer, MDBBtn, MDBNavLink } from "mdbreact";
 import Info from './Info.js';
 import TitlePara from './TitlePara.js';
 
@@ -15,7 +15,8 @@ export class Details extends React.Component{
     this.state = {
       width: window.innerWidth,
       height: window.innerHeight,
-      id:this.props.location.id,
+      //id:this.props.location.id,
+      listingInfo: null,
       listingInfo:[],
       first_name:''
     };
@@ -23,8 +24,10 @@ export class Details extends React.Component{
 }
 
 componentDidMount() {
-  console.log("id is" + JSON.stringify(this.props.location.id));
-  Api.Listings.get({id: this.props.location.id}, listData=>{
+  // console.log("id is" + JSON.stringify(this.props.location.id));
+  // Api.Listings.get({id: this.props.location.id}, listData=>{
+  console.log("id is" + JSON.stringify(this.props.match.id));
+  Api.Listings.get({id: this.props.match.id}, listData=>{
       console.log(listData);
       this.setState({
         listingInfo:listData
@@ -36,7 +39,7 @@ componentDidMount() {
         });
       });
   });
-  console.log("props location is" + JSON.stringify(this.props.location));
+  //console.log("props location is" + JSON.stringify(this.props.location));
 
   this.updateWindowDimensions();
   window.addEventListener('resize', this.updateWindowDimensions);
@@ -105,6 +108,7 @@ updateWindowDimensions() {
     title: this.state.first_name + "\'s Place",
     content: this.state.listingInfo.description
   };
+  let data = {pathname: '/Book', listingInfo:this.state.listingInfo, hostFirstName: this.state.first_name }
 console.log("listing info" + this.state.listingInfo);
 
 
@@ -147,7 +151,7 @@ console.log("listing info" + this.state.listingInfo);
 
       <MDBRow >
         <div className="Details-button" >
-          <MDBBtn id="interestBttn">I'm interested!</MDBBtn>
+          <MDBNavLink to={data}><MDBBtn id="interestBttn">I'm interested!</MDBBtn></MDBNavLink>
         </div>
       </MDBRow>
       </MDBContainer>

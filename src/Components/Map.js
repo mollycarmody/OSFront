@@ -2,6 +2,7 @@ import React from 'react'
 import {compose, withProps} from "recompose"
 import {GoogleMap, Marker, withGoogleMap, withScriptjs, InfoWindow} from 'react-google-maps'
 import MapMarker from "./MapMarker";
+import Autocomplete from 'react-google-autocomplete';
 
 export class Map extends React.Component {
     constructor(props) {

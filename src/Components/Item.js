@@ -32,7 +32,8 @@ export class Item extends React.Component{
       }
       const bookButtonLabel="Book";
     //  const {...props} = this.props;
-      let data = {pathname: '/details', id: this.props.id}
+    //  let data = {pathname: '/details', id: this.props.id}
+    let data = {pathname: '/details/' + this.props.id}
 
         return(
 
