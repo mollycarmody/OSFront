@@ -14,7 +14,7 @@ export class BookPage extends React.Component{
         </div>
 
         <div className = "bookpage-content">
-          <BookForm/>
+          <BookForm id={this.props.match.params.id}/>
         </div>
 
         <footer>

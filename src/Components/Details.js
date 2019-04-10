@@ -103,7 +103,7 @@ updateWindowDimensions() {
     title: this.state.first_name + "\'s Place",
     content: this.state.listingInfo.description
   };
-  let data = {pathname: '/Book', listingInfo:this.state.listingInfo, hostFirstName: this.state.first_name }
+  let data = {pathname: '/Book/' + this.props.match.params.id , listingInfo:this.state.listingInfo, hostFirstName: this.state.first_name, id:this.props.match.params.id }
 console.log("listing info" + this.state.listingInfo);
 
 

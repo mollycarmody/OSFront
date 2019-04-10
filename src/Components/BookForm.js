@@ -10,6 +10,8 @@ import { formatDate, parseDate } from 'react-day-picker/moment';
 import 'react-day-picker/lib/style.css';
 import '../Styles/BookForm.css';
 
+import * as Api from '../apiActions.js';
+
 
 
 export class BookForm extends React.Component{
@@ -27,27 +29,154 @@ export class BookForm extends React.Component{
       showLargeFurniture:false,
       from: undefined,
       to: undefined,
+      startD: '',
+      endD: '',
+      BoxCount:0,
+      BikeCount:0,
+      LargeBoxCount:0,
+      SmallFurnitureCount:0,
+      LargeFurnitureCount:0,
+      TVCount:0,
+      CouchCount:0,
+      SuitcaseCount:0,
+      SuitcaseCount:0,
+      MiniFridgeCount:0,
+      MopedCount:0,
+      note:'',
+      email:'',
+      phone:0
     };
     this.handleFromChange = this.handleFromChange.bind(this);
     this.handleToChange = this.handleToChange.bind(this);
+    this.handleIncrement = this.handleIncrement.bind(this);
+    this.handleDecrement = this.handleDecrement.bind(this);
+    this.get2D = this.get2D.bind(this);
+    this.formatDates = this.formatDates.bind(this);
+    this.handleNoteChange = this.handleNoteChange.bind(this);
+    this.handleContactChange = this.handleContactChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+  // <MDBRow>
+  //   <MDBCol>
+  //     <MDBInput
+  //       label="First Name*"
+  //       group
+  //       type="text"
+  //       validate
+  //       error="wrong"
+  //       success="right"
+  //     />
+  //   </MDBCol>
+  //   <MDBCol>
+  //     <MDBInput
+  //       label="Last Name*"
+  //       group
+  //       type="text"
+  //       validate
+  //       error="wrong"
+  //       success="right"
+  //     />
+  //   </MDBCol>
+  // </MDBRow>
+  // <MDBRow>
+  //   <MDBCol size="sm-3"><h3> interested in delivery?: </h3></MDBCol>
+  //   <MDBCol size="sm-2"><MDBInput gap onClick={this.onClick(1, "deliveryRadio")} checked={this.state.deliveryRadio===1 ? true : false} label="yes" type="radio"
+  //   id="radio1" /></MDBCol>
+  //   <MDBCol size="sm-2"><MDBInput gap onClick={this.onClick(2, "deliveryRadio")} checked={this.state.deliveryRadio===2 ? true : false} label="no" type="radio"
+  //   id="radio2" /></MDBCol>
+  //
+  // </MDBRow>
+  // {this.state.deliveryRadio==1 &&
+  //   <div>
+  //   <MDBRow>
+  //   <MDBCol>
+  //     <MDBInput
+  //       label="Street Address (include APT, etc)"
+  //       group
+  //       type="number"
+  //       validate
+  //       error="wrong"
+  //       success="right"
+  //     />
+  //   </MDBCol>
+  //   </MDBRow>
+  //
+  //   <MDBRow>
+  //     <MDBCol>
+  //     <MDBInput
+  //       label="City"
+  //       group
+  //       type="text"
+  //       validate
+  //       error="wrong"
+  //       success="right"
+  //     />
+  //     </MDBCol>
+  //
+  //     <MDBCol>
+  //
+  //       <Form.Control as="select" id="bookform-states">
+  //         <option>State..</option>
+  //         <option value="Alabama">Alabama</option><option value="Alaska">Alaska</option><option value="Arizona">Arizona</option><option value="Arkansas">Arkansas</option><option value="California">California</option><option value="Colorado">Colorado</option><option value="Connecticut">Connecticut</option><option value="Delaware">Delaware</option><option value="District of Columbia">District of Columbia</option><option value="Florida">Florida</option><option value="Georgia">Georgia</option><option value="Guam">Guam</option><option value="Hawaii">Hawaii</option><option value="Idaho">Idaho</option><option value="Illinois">Illinois</option><option value="Indiana">Indiana</option><option value="Iowa">Iowa</option><option value="Kansas">Kansas</option><option value="Kentucky">Kentucky</option><option value="Louisiana">Louisiana</option><option value="Maine">Maine</option><option value="Maryland">Maryland</option><option value="Massachusetts">Massachusetts</option><option value="Michigan">Michigan</option><option value="Minnesota">Minnesota</option><option value="Mississippi">Mississippi</option><option value="Missouri">Missouri</option><option value="Montana">Montana</option><option value="Nebraska">Nebraska</option><option value="Nevada">Nevada</option><option value="New Hampshire">New Hampshire</option><option value="New Jersey">New Jersey</option><option value="New Mexico">New Mexico</option><option value="New York">New York</option><option value="North Carolina">North Carolina</option><option value="North Dakota">North Dakota</option><option value="Northern Marianas Islands">Northern Marianas Islands</option><option value="Ohio">Ohio</option><option value="Oklahoma">Oklahoma</option><option value="Oregon">Oregon</option><option value="Pennsylvania">Pennsylvania</option><option value="Puerto Rico">Puerto Rico</option><option value="Rhode Island">Rhode Island</option><option value="South Carolina">South Carolina</option><option value="South Dakota">South Dakota</option><option value="Tennessee">Tennessee</option><option value="Texas">Texas</option><option value="Utah">Utah</option><option value="Vermont">Vermont</option><option value="Virginia">Virginia</option><option value="Virgin Islands">Virgin Islands</option><option value="Washington">Washington</option><option value="West Virginia">West Virginia</option><option value="Wisconsin">Wisconsin</option><option value="Wyoming">Wyoming</option>
+  //       </Form.Control>
+  //     </MDBCol>
+  //
+  //     <MDBCol>
+  //     <MDBInput
+  //       label="Zip"
+  //       group
+  //       type="number"
+  //       validate
+  //       error="wrong"
+  //       success="right"
+  //     />
+  //     </MDBCol>
+  //   </MDBRow>
+  //
+  //   </div>
+  //
+  //
+  // }
 
   onClick = (nr, type) => () => {
     console.log(type);
     console.log(nr);
     let typeRadio = type;
     this.setState({
-      [type]: nr
+        [type]: nr
     });
   }
 
-  handleValueSelected=(event) =>{
+
+
+  Selected=(event) =>{
     let noSpace = event.target.value.split(' ').join('');
-    let storeItem = `show${noSpace}`;
+    let showItem = `show${noSpace}`;
+    let countItem = noSpace+'Count';
+    console.log("count item is " + countItem );
     this.setState({
       value: [ ...event.target.value ],
-      [storeItem]:true
+      [showItem]:true
     });
+  }
+
+  get2D( num ) {
+     if( num.toString().length < 2 ) // Integer of less than two digits
+         return "0" + num; // Prepend a zero!
+     return num.toString(); // return string for consistency
+  }
+
+  formatDates(date){
+    const months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var dateA = date.toString().split(' '); //split by spaceTypes
+    let year = dateA[3].toString();
+    let day = dateA[2].toString();
+    let month = months.indexOf(dateA[1])+1;
+    const monthString = this.get2D(month);
+    const dayString = this.get2D(day);
+    const newDate = year + '-' + monthString + '-' + dayString;
+    console.log("new date" + newDate);
+    return newDate;
   }
 
   showFromMonth() {
@@ -61,19 +190,93 @@ export class BookForm extends React.Component{
   }
   handleFromChange(from) {
     // Change the from date and focus the "to" input field
-    this.setState({ from });
+    console.log(from);
+    const d = this.formatDates(from);
+    this.setState({
+      from,
+      startD: d
+    });
   }
   handleToChange(to) {
-    this.setState({ to }, this.showFromMonth);
+    console.log(to);
+    const d = this.formatDates(to);
+    this.setState({
+      to,
+      endD: d
+    }, this.showFromMonth);
   }
 
+  handleIncrement(item){
+    console.log("up");
+    let countItem = item+'Count';
+    console.log("count item is " + countItem );
 
+    this.setState({
+      [countItem]:this.state[countItem]+1
+    });
+  }
+  handleDecrement(item){
+    console.log("down");
+    let countItem = item+'Count';
+    console.log("count item is " + countItem );
+
+    this.setState({
+      [countItem]:this.state[countItem]==0? 0:this.state[countItem]-1
+    });
+  }
+
+  handleNoteChange(event){
+    this.setState({
+      note: event.target.value
+    });
+  }
+  handleContactChange(event){
+    if(this.state.contactRadio==1){
+      this.setState({
+        email: event.target.value
+      });
+    }else{
+      this.setState({
+        phone: event.target.value
+      });
+    }
+
+  }
+
+  handleSubmit(){
+    console.log("submit!");
+    //post data
+    console.log("id is" + JSON.stringify(this.props.id));
+    const data = {
+      listing:{
+        id: this.props.id
+      },
+      price: '$5.00',
+      booked_space: 100,
+      start_date: this.state.startD,
+      end_date: this.state.endD,
+      additional_instructions: this.state.note,
+      confirmed:false,
+      booker: "mollycarmody"
+    }
+    Api.Bookings.create(data, response =>{
+      console.log("post attempt");
+      console.log(response);
+
+    })
+    //data validate
+  }
   render(){
     const { from, to } = this.state;
     const modifiers = { start: from, end: to };
-  const itemTypes = ['Box', 'Small Furniture', 'Large Furniture', 'TV', 'Couch', 'Suitcase', 'Mini Fridge', 'Moped', 'Bike'];
-  const itemCountElements = itemTypes.map((type, index) =>
-    <CountItem name={type} id={index}/>
+    const itemTypes = ['Box', 'Small Furniture', 'Large Furniture', 'TV', 'Couch', 'Suitcase', 'Mini Fridge', 'Moped', 'Bike'];
+    const itemCountElements = itemTypes.map((type, index) =>{
+    let noSpace = type.replace(/\s+/g, '');
+    let countItem = noSpace+'Count';
+    return <CountItem count={this.state[countItem]} name={type} id={index} handleIncrement={this.handleIncrement} handleDecrement = {this.handleDecrement}/>;
+  }
+
+
   );
 
 
@@ -89,28 +292,6 @@ export class BookForm extends React.Component{
              <MDBContainer id="bookform-container">
               <div className ="bookform-content">
                 <MDBRow>
-                  <MDBCol>
-                    <MDBInput
-                      label="First Name*"
-                      group
-                      type="text"
-                      validate
-                      error="wrong"
-                      success="right"
-                    />
-                  </MDBCol>
-                  <MDBCol>
-                    <MDBInput
-                      label="Last Name*"
-                      group
-                      type="text"
-                      validate
-                      error="wrong"
-                      success="right"
-                    />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
                   <MDBCol size="sm-3"><h3> Preferred form of contact: </h3></MDBCol>
                   <MDBCol size="sm-2"><MDBInput gap onClick={this.onClick(1, "contactRadio")} checked={this.state.contactRadio===1 ? true : false} label="email" type="radio"
                   id="radio1" /></MDBCol>
@@ -118,6 +299,7 @@ export class BookForm extends React.Component{
                   id="radio2" /></MDBCol>
                   <MDBCol size="sm-5">
                   {this.state.contactRadio===1 && <MDBInput
+                    onChange ={this.handleContactChange}
                     label="Your email *"
                     group
                     type="email"
@@ -127,6 +309,7 @@ export class BookForm extends React.Component{
                   />}
 
                   {this.state.contactRadio===2 && <MDBInput
+                    onChange ={this.handleContactChange}
                     label="Your phone *"
                     group
                     type="number"
@@ -136,65 +319,7 @@ export class BookForm extends React.Component{
                   />}
                   </MDBCol>
                 </MDBRow>
-                <MDBRow>
-                  <MDBCol size="sm-3"><h3> interested in delivery?: </h3></MDBCol>
-                  <MDBCol size="sm-2"><MDBInput gap onClick={this.onClick(1, "deliveryRadio")} checked={this.state.deliveryRadio===1 ? true : false} label="yes" type="radio"
-                  id="radio1" /></MDBCol>
-                  <MDBCol size="sm-2"><MDBInput gap onClick={this.onClick(2, "deliveryRadio")} checked={this.state.deliveryRadio===2 ? true : false} label="no" type="radio"
-                  id="radio2" /></MDBCol>
 
-                </MDBRow>
-                {this.state.deliveryRadio==1 &&
-                  <div>
-                  <MDBRow>
-                  <MDBCol>
-                    <MDBInput
-                      label="Street Address (include APT, etc)"
-                      group
-                      type="number"
-                      validate
-                      error="wrong"
-                      success="right"
-                    />
-                  </MDBCol>
-                  </MDBRow>
-
-                  <MDBRow>
-                    <MDBCol>
-                    <MDBInput
-                      label="City"
-                      group
-                      type="text"
-                      validate
-                      error="wrong"
-                      success="right"
-                    />
-                    </MDBCol>
-
-                    <MDBCol>
-
-                      <Form.Control as="select" id="bookform-states">
-                        <option>State..</option>
-                        <option value="Alabama">Alabama</option><option value="Alaska">Alaska</option><option value="Arizona">Arizona</option><option value="Arkansas">Arkansas</option><option value="California">California</option><option value="Colorado">Colorado</option><option value="Connecticut">Connecticut</option><option value="Delaware">Delaware</option><option value="District of Columbia">District of Columbia</option><option value="Florida">Florida</option><option value="Georgia">Georgia</option><option value="Guam">Guam</option><option value="Hawaii">Hawaii</option><option value="Idaho">Idaho</option><option value="Illinois">Illinois</option><option value="Indiana">Indiana</option><option value="Iowa">Iowa</option><option value="Kansas">Kansas</option><option value="Kentucky">Kentucky</option><option value="Louisiana">Louisiana</option><option value="Maine">Maine</option><option value="Maryland">Maryland</option><option value="Massachusetts">Massachusetts</option><option value="Michigan">Michigan</option><option value="Minnesota">Minnesota</option><option value="Mississippi">Mississippi</option><option value="Missouri">Missouri</option><option value="Montana">Montana</option><option value="Nebraska">Nebraska</option><option value="Nevada">Nevada</option><option value="New Hampshire">New Hampshire</option><option value="New Jersey">New Jersey</option><option value="New Mexico">New Mexico</option><option value="New York">New York</option><option value="North Carolina">North Carolina</option><option value="North Dakota">North Dakota</option><option value="Northern Marianas Islands">Northern Marianas Islands</option><option value="Ohio">Ohio</option><option value="Oklahoma">Oklahoma</option><option value="Oregon">Oregon</option><option value="Pennsylvania">Pennsylvania</option><option value="Puerto Rico">Puerto Rico</option><option value="Rhode Island">Rhode Island</option><option value="South Carolina">South Carolina</option><option value="South Dakota">South Dakota</option><option value="Tennessee">Tennessee</option><option value="Texas">Texas</option><option value="Utah">Utah</option><option value="Vermont">Vermont</option><option value="Virginia">Virginia</option><option value="Virgin Islands">Virgin Islands</option><option value="Washington">Washington</option><option value="West Virginia">West Virginia</option><option value="Wisconsin">Wisconsin</option><option value="Wyoming">Wyoming</option>
-                      </Form.Control>
-                    </MDBCol>
-
-                    <MDBCol>
-                    <MDBInput
-                      label="Zip"
-                      group
-                      type="number"
-                      validate
-                      error="wrong"
-                      success="right"
-                    />
-                    </MDBCol>
-                  </MDBRow>
-
-                  </div>
-
-
-                }
                 <MDBRow>
                   <MDBCol>
                     <h4>Dates to be stored</h4>
@@ -251,12 +376,12 @@ export class BookForm extends React.Component{
                 </MDBRow>
                 <MDBRow>
                   <MDBCol>
-                    <MDBInput id="bookform-extrainfo" type="textarea" label="ex: I have a oddly shaped item..." rows="5" cols="100"/>
+                    <MDBInput onChange={this.handleNoteChange} id="bookform-extrainfo" type="textarea" label="ex: I have a oddly shaped item..." rows="5" cols="100"/>
                   </MDBCol>
                 </MDBRow>
               </div>
               <div className ="bookform-submit">
-                  <MDBBtn outline color="secondary">
+                  <MDBBtn outline color="secondary" onClick={this.handleSubmit}>
                     Send
                   </MDBBtn>
               </div>
