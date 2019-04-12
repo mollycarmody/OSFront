@@ -256,8 +256,8 @@ export class BookForm extends React.Component{
       start_date: this.state.startD,
       end_date: this.state.endD,
       additional_instructions: this.state.note,
-      confirmed:false,
-      booker: "mollycarmody"
+//      confirmed:false,   // Just don't include this. Only admins should be able to modify confimed/unconfirmed
+//      booker: "mollycarmody" // Don't include your username. It knows who you are if you are logged in.
     }
     Api.Bookings.create(data, response =>{
       console.log("post attempt");
