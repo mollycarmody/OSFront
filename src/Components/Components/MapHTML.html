@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- This is the code that given place IDs from database,
+the map will display markers at those given locations corresponding to the place ID.
+In this implementation, markers will display further information about the storage capacities, etc. of a given location
+by clicking on one of the markers -->
+
+
+<body>
+<div id="map"></div>
+<div id="infowindow-content">
+    <h1 id="place-name" class="title"></h1><br>
+    <img src="" id="place-photo" alt="" height="300" /><br>
+    <strong>Distance Away:</strong> <span id="distance-to"></span> seconds<br>
+    <strong>Address:</strong> <span id="place-address"></span> <br>
+    <strong>Space Type:</strong> <span id="space-type"></span><br>
+    <strong>Total Space:</strong> <span id="total-space"></span> Square Feet<br>
+    <strong>List Price:</strong> <span id="listed-price"></span><br>
+    <strong>Start Date:</strong> <span id="start-date"></span><br>
+    <strong>End Date:</strong> <span id="end-date"></span><br>
+    <strong>Host Username: </strong> <span id="host"></span>
+</div>
+<script>
+    var getListings = function () {
+        var data = JSON.stringify(false);
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                initMap(this.responseText);
+            }
+        });
+        xhr.open("GET", "https://vcm-8728.vm.duke.edu:8888/api/listings/?from_place_id=ChIJx71m2a_mrIkRhgVQmYGoOIo&radius=20000");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(data);
+    }
+    var geocoder;
+    function initMap(responseText) {
+        var listings = JSON.parse(responseText)
+        geocoder = new google.maps.Geocoder();
+        var myLatLng = {lat: 36.0014, lng: -78.9382};           // centered on Duke University... lat: 36.0014, lng: -78.9382
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: myLatLng
+        });
+        var infowindow = new google.maps.InfoWindow()
+        var infowindowContent = document.getElementById('infowindow-content')
+        listings.forEach(listing => {
+            geocoder.geocode({'placeId': listing.location.google_place_id}, function (results, status) {
+                if (status === 'OK') {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                        clickable: true,
+                    });
+                    marker.addListener('click', function () {
+                        console.log(JSON.stringify(listing.location))
+                        infowindowContent.children['place-name'].textContent = listing.location.name
+                        infowindowContent.children['distance-to'].textContent = listing.distance_to
+                        infowindowContent.children['place-address'].textContent = listing.location.address
+                        infowindowContent.children['start-date'].textContent = listing.start_date
+                        infowindowContent.children['end-date'].textContent = listing.end_date
+                        infowindowContent.children['space-type'].textContent = listing.space_type
+                        infowindowContent.children['total-space'].textContent = listing.total_space
+                        infowindowContent.children['listed-price'].textContent = listing.listed_price
+                        infowindowContent.children['host'].textContent = listing.host
+                        if (listing.location.photos.length !== 0) {
+                           infowindowContent.children['place-photo'].src = listing.location.photos[0]
+                           infowindowContent.children['place-photo'].style.display = "inline-block"
+                       } else {
+                           infowindowContent.children['place-photo'].style.display = "none"
+                       }
+                        infowindow.setContent(infowindowContent)
+                        infowindow.open(map, this)
+                    })
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            })
+        })
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbGXFv-QOejj2G8vfGj5cIuYqXjI1AhRU&callback=getListings">
+</script>
+</body>
+</html>
