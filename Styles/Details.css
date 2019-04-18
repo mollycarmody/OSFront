@@ -1,0 +1,29 @@
+#galleryCol{
+  max-height:10%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.Details-info, .Details-about{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.Details-info{
+  border-right: 1px solid #ccc;
+}
+
+#interestBttn{
+  text-align: center;
+}
+.Details-button{
+  display: inline-block;
+}
+@media (max-width:575px) {
+  .Details-info{
+    border-bottom: 1px solid #ccc;
+    border-right: none;
+  }
+}
