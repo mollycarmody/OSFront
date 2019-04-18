@@ -2,7 +2,7 @@ import React from 'react';
 import Point from './Point.js';
 import Button from './Button.js';
 import {BrowserRouter, Route, NavLink} from 'react-router-dom';
-import {MDBContainer, MDBRow, MDBCol, MDBFormInline, MDBIcon, MDBBtn} from "mdbreact";
+import {MDBCard, MDBContainer, MDBRow, MDBCol, MDBFormInline, MDBIcon, MDBBtn} from "mdbreact";
 import '../Styles/Item.css';
 import * as Api from '../apiActions.js';
 
@@ -38,6 +38,7 @@ export class Item extends React.Component {
 
             <div key={this.props.id}>
                 <MDBContainer className="item-whole">
+                  <MDBCard className="card-body">
                     <MDBRow className="item-info">
                         <MDBCol size="sm">
                             <h1>{this.props.location.name}</h1>
@@ -62,6 +63,7 @@ export class Item extends React.Component {
                     <MDBRow>
                         <h4 className="item-title">Space Hosted By: {this.state.first_name}</h4>
                     </MDBRow>
+                  </MDBCard>
                 </MDBContainer>
             </div>
 

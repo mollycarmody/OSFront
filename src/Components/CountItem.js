@@ -29,8 +29,7 @@ export class CountItem extends React.Component{
   render(){
     let noSpaceName = this.props.name.replace(/\s+/g, '');
     return(
-      <div>
-      <MDBRow>
+      <>
         <MDBCol>
           {this.props.name}
         </MDBCol>
@@ -42,8 +41,7 @@ export class CountItem extends React.Component{
            <MDBBtn outline color="primary" onClick={()=>{this.props.handleIncrement(noSpaceName)}} className="plus" id="countitem-button"></MDBBtn>
          </div>
         </MDBCol>
-      </MDBRow>
-      </div>
+      </>
 
     );
   }

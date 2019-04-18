@@ -77,10 +77,10 @@ export const Bookings = {
         axios.get('bookings/')
             .then(response => handleResponse(response, callback)),
     get: ({id}, callback) =>
-        axios.get('bookings/' + id + '/')
+        axios.get(API_BASE_URL + 'bookings/' + id + '/')
             .then(response => handleResponse(response, callback)),
     create: (data, callback) =>
-        axios.post('bookings/', data)
+        axios.post(API_BASE_URL +'bookings/', data)
             .then(response => handleResponse(response, callback)),
     update: ({id, ...rest}, callback) =>
         axios.post('bookings/' + id + '/', rest)

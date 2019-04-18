@@ -44,7 +44,14 @@ export class BookForm extends React.Component{
       MopedCount:0,
       note:'',
       email:'',
-      phone:0
+      phone:0,
+      emailClass:'',
+      phoneClass:'',
+      startDClass:'',
+      endDClass:'',
+      priceEstimate: 0,
+      storeTime: 'summer',
+      prices: [16, 50, 20, 35, 80, 20, 25, 40, 30]
     };
     this.handleFromChange = this.handleFromChange.bind(this);
     this.handleToChange = this.handleToChange.bind(this);
@@ -55,6 +62,8 @@ export class BookForm extends React.Component{
     this.handleNoteChange = this.handleNoteChange.bind(this);
     this.handleContactChange = this.handleContactChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.hSubmit = this.hSubmit.bind(this);
+    this.calculatePrice = this.calculatePrice.bind(this);
   }
   // <MDBRow>
   //   <MDBCol>
@@ -213,6 +222,8 @@ export class BookForm extends React.Component{
 
     this.setState({
       [countItem]:this.state[countItem]+1
+    }, () => {
+    this.calculatePrice();
     });
   }
   handleDecrement(item){
@@ -222,7 +233,9 @@ export class BookForm extends React.Component{
 
     this.setState({
       [countItem]:this.state[countItem]==0? 0:this.state[countItem]-1
-    });
+    }, () => {
+    this.calculatePrice();
+});
   }
 
   handleNoteChange(event){
@@ -231,16 +244,33 @@ export class BookForm extends React.Component{
     });
   }
   handleContactChange(event){
+
     if(this.state.contactRadio==1){
-      this.setState({
-        email: event.target.value
-      });
+      var regexp = '';
+      //if(event.target.value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+      //  console.log("email passing!");
+        this.setState({
+          email: event.target.value
+        });
+    ///  }else{
+    //    console.log("email not poassing");
+    //  }
     }else{
-      this.setState({
-        phone: event.target.value
-      });
+
+        this.setState({
+          phone: event.target.value
+        });
+      }
     }
 
+  calculatePrice(){
+      let price = this.state.BoxCount * 16 + this.state.LargeFurnitureCount * 50 + this.state.SmallFurnitureCount * 20 + this.state.TVCount * 35 + this.state.CouchCount * 80 + this.state.SuitcaseCount * 20 + this.state.MiniFridgeCount * 25 + this.state.MopedCount * 40 + this.state.BikeCount * 30;
+      if(this.state.storeTime=='summerAndAbroad'){
+        price = price *2;
+      }
+      this.setState({
+        priceEstimate: price
+      });
   }
 
   handleSubmit(){
@@ -256,8 +286,8 @@ export class BookForm extends React.Component{
       start_date: this.state.startD,
       end_date: this.state.endD,
       additional_instructions: this.state.note,
-      confirmed:false,
-      booker: "mollycarmody"
+      //confirmed:false,
+      //booker: "mollycarmody"
     }
     Api.Bookings.create(data, response =>{
       console.log("post attempt");
@@ -266,18 +296,94 @@ export class BookForm extends React.Component{
     })
     //data validate
   }
+
+  hSubmit(e){
+    e.preventDefault();
+    const {contactRadio, phone, email, startD, endD} = this.state;
+    let flag = true;
+    var emailClass='';
+    var phoneClass='';
+    var startDClass='';
+    var endDClass='';
+    if((contactRadio==1) && (email==='')){
+      console.log("email no");
+      flag=false;
+      emailClass="invalid";
+    }
+    if((contactRadio==2) && (phone===0||phone===null||phone===undefined)){
+      console.log("phone no");
+      flag=false;
+      phoneClass="invalid";
+    }
+    if(startD===''){
+      console.log("nostartD");
+      flag=false;
+      startDClass="invalid";
+    }
+    if(endD===''){
+      console.log("noendD");
+      flag=false;
+      endDClass="invalid";
+    }
+    if(flag){
+      console.log('you can submit!');
+      this.handleSubmit();
+    }else{
+      console.log("there were errors!");
+      this.setState({
+        emailClass,
+        phoneClass,
+        startDClass,
+        endDClass
+      })
+    }
+  }
   render(){
-    const { from, to } = this.state;
+    const { from, to, storeTime } = this.state;
     const modifiers = { start: from, end: to };
     const itemTypes = ['Box', 'Small Furniture', 'Large Furniture', 'TV', 'Couch', 'Suitcase', 'Mini Fridge', 'Moped', 'Bike'];
+
+  //  const prices2 =  storeTime=='summerAndAbroad'? prices*2 : prices;
     const itemCountElements = itemTypes.map((type, index) =>{
     let noSpace = type.replace(/\s+/g, '');
     let countItem = noSpace+'Count';
-    return <CountItem count={this.state[countItem]} name={type} id={index} handleIncrement={this.handleIncrement} handleDecrement = {this.handleDecrement}/>;
+    return (
+      <MDBRow>
+        <CountItem count={this.state[countItem]} name={type} id={index} handleIncrement={this.handleIncrement} handleDecrement = {this.handleDecrement}/>
+        <MDBCol className="bookform-itemprice">
+          x {this.state.prices[index]}
+        </MDBCol>
+      </MDBRow>
+    );
   }
-
-
   );
+  const takenFromDates=[
+    {
+      after:to
+    },
+    {
+      from:new Date(2019, 3, 20),
+        to:new Date(2019, 3, 25)
+    },
+    {
+      from:new Date(2019, 3, 12),
+        to:new Date(2019, 3, 13)
+    }
+  ];
+  const takenToDates=[
+    {
+      before:from
+    },
+    {
+      from:new Date(2019, 3, 20),
+        to:new Date(2019, 3, 25)
+    },
+    {
+      from:new Date(2019, 3, 12),
+        to:new Date(2019, 3, 13)
+    }
+  ];
+
 
 
     return(
@@ -288,87 +394,125 @@ export class BookForm extends React.Component{
             <h4>Please fill out the form below to submit a booking request. We will follow up as soon as possible to confirm the booking and setup details for payment, delivery, etc.</h4>
           </div>
           <MDBRow>
-            <form>
+            <form onSubmit={this.hSubmit}
+              noValidate
+            >
              <MDBContainer id="bookform-container">
               <div className ="bookform-content">
                 <MDBRow>
-                  <MDBCol size="sm-3"><h3> Preferred form of contact: </h3></MDBCol>
+                  <MDBCol size="sm-3"><div className="bookform-label"> Preferred form of contact: </div></MDBCol>
                   <MDBCol size="sm-2"><MDBInput gap onClick={this.onClick(1, "contactRadio")} checked={this.state.contactRadio===1 ? true : false} label="email" type="radio"
                   id="radio1" /></MDBCol>
                   <MDBCol size="sm-2"><MDBInput gap onClick={this.onClick(2, "contactRadio")} checked={this.state.contactRadio===2 ? true : false} label="phone" type="radio"
                   id="radio2" /></MDBCol>
                   <MDBCol size="sm-5">
                   {this.state.contactRadio===1 && <MDBInput
+                    className={this.state.emailClass}
                     onChange ={this.handleContactChange}
                     label="Your email *"
                     group
                     type="email"
                     validate
-                    error="wrong"
-                    success="right"
+                    required
                   />}
 
                   {this.state.contactRadio===2 && <MDBInput
+                    className={this.state.phoneClass}
                     onChange ={this.handleContactChange}
                     label="Your phone *"
                     group
                     type="number"
                     validate
-                    error="wrong"
-                    success="right"
+                    required
                   />}
                   </MDBCol>
                 </MDBRow>
 
                 <MDBRow>
-                  <MDBCol>
-                    <h4>Dates to be stored</h4>
+                  <MDBCol size="sm-4">
+                    <div className="bookform-label">Dates to be stored</div>
                   </MDBCol>
 
                   <MDBCol>
-                  <div className="InputFromTo">
-                     <DayPickerInput
-                       value={from}
-                       placeholder="From"
-                       format="LL"
-                       formatDate={formatDate}
-                       parseDate={parseDate}
-                       dayPickerProps={{
-                         selectedDays: [from, { from, to }],
-                         disabledDays: { after: to },
-                         toMonth: to,
-                         modifiers,
-                         numberOfMonths: 1,
-                         onDayClick: () => this.to.getInput().focus(),
-                       }}
-                       onDayChange={this.handleFromChange}
-                     />{' '}
-                     —{' '}
-                     <span className="InputFromTo-to">
-                       <DayPickerInput
-                         ref={el => (this.to = el)}
-                         value={to}
-                         placeholder="To"
-                         format="LL"
-                         formatDate={formatDate}
-                         parseDate={parseDate}
-                         dayPickerProps={{
-                           selectedDays: [from, { from, to }],
-                           disabledDays: { before: from },
-                           modifiers,
-                           month: from,
-                           fromMonth: from,
-                           numberOfMonths: 1,
-                         }}
-                         onDayChange={this.handleToChange}
-                       />
-                     </span>
-                  </div>
-                  </MDBCol>
+
+                    <div className="InputFromTo">
+
+                      <MDBCol>
+
+                           <DayPickerInput
+                             value={from}
+                             placeholder="From"
+                             format="LL"
+                             formatDate={formatDate}
+                             parseDate={parseDate}
+                             dayPickerProps={{
+                               selectedDays: [from, { from, to }],
+                               disabledDays: takenFromDates,
+                               toMonth: to,
+                               modifiers,
+                               numberOfMonths: 1,
+                               onDayClick: () => this.to.getInput().focus(),
+                             }}
+                             onDayChange={this.handleFromChange}
+                             required
+                           />
+                      
+                      </MDBCol>
+                      <MDBCol>
+
+                         <span className="InputFromTo-to">
+                           <div className={this.state.endDClass}>
+                             <DayPickerInput
+                             className={this.state.endDClass}
+                               ref={el => (this.to = el)}
+                               value={to}
+                               placeholder="To"
+                               format="LL"
+                               formatDate={formatDate}
+                               parseDate={parseDate}
+                               dayPickerProps={{
+                                 selectedDays: [from, { from, to }],
+                                 disabledDays: takenToDates,
+                                 modifiers,
+                                 month: from,
+                                 fromMonth: from,
+                                 numberOfMonths: 1,
+                               }}
+                               onDayChange={this.handleToChange}
+                               required
+                             />
+                            </div>
+                         </span>
+                      </MDBCol>
+
+                    </div>
+
+                    </MDBCol>
                 </MDBRow>
+
                 <MDBRow>
                   <MDBCol>
-                    <ToggleInfo title="item count" content={itemCountElements}/>
+                    {itemCountElements}
+                  </MDBCol>
+                </MDBRow>
+
+                <MDBRow className="bookform-costEstimateRow">
+                  <MDBCol size="sm-8"><div className="bookform-label">Total cost (estimate):</div></MDBCol>
+                  <MDBCol size="sm-4"> {this.state.priceEstimate}</MDBCol>
+                </MDBRow>
+
+                <MDBRow>
+                  <MDBCol>
+                  <div className="bookform-label">Venmo Handle (for future payment reference). </div>
+                  <div className="bookform-sublabel">This information will remain private and we will not make Venmo charges until the booking is confirmed.</div>
+                    <MDBInput
+                      onChange ={this.handleVenmoChange}
+                      label="@john-smith2"
+                      group
+                      type="text"
+                      validate
+                      required
+                    />
                   </MDBCol>
                 </MDBRow>
                 <MDBRow>
@@ -381,7 +525,7 @@ export class BookForm extends React.Component{
                 </MDBRow>
               </div>
               <div className ="bookform-submit">
-                  <MDBBtn outline color="secondary" onClick={this.handleSubmit}>
+                  <MDBBtn outline color="secondary" type="submit">
                     Send
                   </MDBBtn>
               </div>

@@ -40,6 +40,7 @@ padding-right: 70px;
   text-align: center;
   margin:20px;
 }
+
 .InputFromTo .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
     background-color: #f0f8ff !important;
     color: #4a90e2;
@@ -61,3 +62,11 @@ padding-right: 70px;
   .InputFromTo-to .DayPickerInput-Overlay {
 
   }
+
+.invalid{
+  border-bottom:1px solid #ff0000
+}
+
+.bookform-costEstimateRow{
+  border-top:1px solid #ced4da;
+}
