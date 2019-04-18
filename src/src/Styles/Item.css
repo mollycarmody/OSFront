@@ -1,0 +1,19 @@
+.item-title{
+  font-size: 20px;
+}
+
+
+.item-whole{
+  border-bottom: 1px solid #cecece;
+}
+
+@media (max-width:575px) {
+  .item-info{
+    text-align: center;
+  }
+  .item-points{
+    text-align: left;
+    width: 50%;
+    left: 25%;
+  }
+}
