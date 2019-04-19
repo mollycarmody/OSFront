@@ -1,0 +1,79 @@
+.userprofile-main{
+  height:100vh;
+  position:relative;
+
+}
+.userprofile-content{
+ padding-bottom: 20vh;
+}
+
+input, input[type=text].form-control{
+  height:auto;
+
+}
+.userprofile-title,.userprofile-button{
+  text-align: center;
+}
+.radioLabel{
+  display: inline;
+  margin-left: 20px;
+}
+.userprofile-dropzone{
+  width: 100%;
+  min-height: 90px;
+  text-align: center;
+  line-height: 90px;
+  background-color:	#F0F0F0;
+  border: 2px dashed #E8E8E8;
+  border-radius: 20px;
+
+}
+.userprofile-button{
+  border-radius: 20px;
+}
+.userprofile-selector{
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.bottomdiv {
+
+    position:absolute;
+    left:0;
+    bottom:0;
+}
+#dropfile-bttnCol{
+  position: relative;
+}
+.dropfile-bttn{
+  width:100px;
+  border-radius:20px;
+}
+#bookform-textCol>.md-form{
+  margin-top: 0px;
+}
+.userprofile-container{
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.userprofile-container{
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left:auto;
+  margin-right: auto;
+
+}
+
+@media (min-width:768px) {
+  .userprofile-container{
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 700px;
+
+  }
+}
+@media (max-width: 575px){
+  .form-control{
+    height:auto;
+  }
+}

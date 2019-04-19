@@ -13,6 +13,7 @@ import ContactPage from './Components/ContactPage.js';
 import TermsCond from './Components/TermsCond.js';
 import Autocomplete from 'react-google-autocomplete';
 import BookPage from './Components/BookPage.js';
+import UserProfile from './Components/UserProfile.js';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import {
   BrowserRouter,
@@ -71,6 +72,7 @@ class App extends Component{
                   <Route path="/Contact" component={ContactPage}/>
                   <Route path="/Faq" component={Faq}/>
                   <Route path="/Book/:id" component={BookPage}/>
+                  <Route path="/Profile" component={UserProfile}/>
                 </div>
           </BrowserRouter>
         );

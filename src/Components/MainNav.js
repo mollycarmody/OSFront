@@ -124,6 +124,7 @@ console.log(this.state.width);
            <NavLink to="/">
             <img className="navbar-brand" src="/OpenSpaceRevised.png" alt="OpenSpaceRevised"/>
            </NavLink>
+
            {this.state.width<767 && <CustomToggler handleClick={this.handleClick} />}
            <MDBCollapse isOpen={this.state.collapse} navbar>
              <MDBNavbarNav left>
@@ -143,6 +144,10 @@ console.log(this.state.width);
 
                <MDBNavItem>
                  <MDBNavLink to="/MeetTheTeam">About</MDBNavLink>
+               </MDBNavItem>
+
+               <MDBNavItem>
+                <MDBNavLink to="/Profile">Profile</MDBNavLink>
                </MDBNavItem>
              </MDBNavbarNav>
            </MDBCollapse>
