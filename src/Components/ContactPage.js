@@ -21,7 +21,7 @@ export class ContactPage extends React.Component{
     this.handleSubmit=this.handleSubmit.bind(this);
     this.handleChange=this.handleChange.bind(this);
   }
-  
+
   handleChange(e){
     this.setState({
       [e.target.id]:[e.target.value]
@@ -76,7 +76,7 @@ export class ContactPage extends React.Component{
   render(){
     return(
       <div className="contactpage-main">
-        <MainNav showSearch={true}/>
+        <MainNav showSearch={false}/>
         <MDBContainer id="contactpage-container">
           <MDBRow id="title">
               <h1>Contact Us</h1>
@@ -86,7 +86,6 @@ export class ContactPage extends React.Component{
           <MDBRow id="form">
             <form
               onSubmit={this.handleSubmit}
-              noValidate
             >
               <p className="h5 text-center mb-4">Questions? Comments? Concerns?</p>
               <div className="grey-text">

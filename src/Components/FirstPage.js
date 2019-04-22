@@ -25,6 +25,8 @@ export class FirstPage extends React.Component{
     this.state={
       value:"",
       nextImg: false,
+      where: '',
+      distance:undefined,
       startD: '',
       endD:'',
       from: undefined,
@@ -40,17 +42,18 @@ export class FirstPage extends React.Component{
     this.formatDates = this.formatDates.bind(this);
     this.handleLearnMore = this.handleLearnMore.bind(this);
   }
-  handleChange(event){
+  handleChange(event, type){
     console.log(event.target.value);
-    this.setState({value: event.target.value});
+    console.log(type);
+    this.setState({[type]: event.target.value});
   }
 
-  handleSubmit(event){
+  handleSubmit(event, filterInfo){
     event.preventDefault()
     console.log("hi");
     this.props.history.push({
       pathname: '/Listing',
-      state: { searchVal: this.state.value }
+      state: { filterInfo }
     });
   }
   //
@@ -114,6 +117,7 @@ export class FirstPage extends React.Component{
 
   render(){
     const { from, to } = this.props;
+    const {where, distance, startD, endD} = this.state;
     const modifiers = { start: from, end: to };
     const reviews = [
       {
@@ -129,6 +133,8 @@ export class FirstPage extends React.Component{
         name: '- Molly, Duke student'
       }
   ];
+  let filterInfo = [ where, distance, startD, endD ];
+  console.log(filterInfo);
 
     const slides = reviews.map((review, index) =>
         <div id={index}>
@@ -154,7 +160,7 @@ export class FirstPage extends React.Component{
 
   <div className="firstpage-whole">
   <Section className="section" id="section1">
-  <form>
+  <form onSubmit = {(event)=>this.handleSubmit(event, {filterInfo})}>
   <MDBContainer>
     <MDBRow>
     <MDBCol id="firstpage-filterCol" size="sm-6">
@@ -172,6 +178,9 @@ export class FirstPage extends React.Component{
               label="Where"
               group
               type="text"
+              required
+              validate
+              onChange = {(event)=>this.handleChange(event, 'where')}
             />
           </MDBRow>
 
@@ -192,7 +201,7 @@ export class FirstPage extends React.Component{
                   numberOfMonths: 1,
                   onDayClick: () => this.to.getInput().focus(),
                 }}
-                onDayChange={this.props.handleFromChange}
+                onDayChange={this.handleFromChange}
               />
             </MDBCol>
 
@@ -213,7 +222,7 @@ export class FirstPage extends React.Component{
                   fromMonth: from,
                   numberOfMonths: 1,
                 }}
-                onDayChange={this.props.handleToChange}
+                onDayChange={this.handleToChange}
               />
             </MDBCol>
           </MDBRow>
@@ -223,6 +232,7 @@ export class FirstPage extends React.Component{
             label="Driving distance (minutes)"
             group
             type="text"
+            onChange = {(event)=>this.handleChange(event, 'distance')}
           />
           </MDBRow>
 

@@ -44,6 +44,7 @@ input, input[type=text].form-control{
 #dropfile-bttnCol{
   position: relative;
 }
+
 .dropfile-bttn{
   width:100px;
   border-radius:20px;
@@ -75,5 +76,13 @@ input, input[type=text].form-control{
 @media (max-width: 575px){
   .form-control{
     height:auto;
+  }
+  #dropfile-avatarCol{
+    height:320px;
+    text-align: center;
+  }
+  .bottomdiv{
+    text-align: center;
+    width:100%;
   }
 }

@@ -1,0 +1,44 @@
+
+.becomehost-container{
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left:auto;
+  margin-right: auto;
+  height:100%;
+  padding-bottom: 60px;
+}
+.becomehost-title{
+  text-align: center;
+}
+.becomehost-subtitle{
+  font-size: 20px;
+}
+.becomehost-subtitleRow{
+  margin-top: 30px;
+}
+.becomehost-buttonRow{
+  text-align: center;
+  width: 100%;
+}
+.becomehost-button{
+  border-radius: 20px;
+}
+#becomehost-spaceTypes{
+    border:none;
+    box-shadow: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    outline: none;
+    border: 1px solid #ced4da;
+    border-radius: 0;
+    box-sizing: content-box;
+    background-color: transparent;
+    margin-bottom: 2.5rem;
+}
+@media (min-width:768px) {
+  .becomehost-container{
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 700px;
+
+  }
+}

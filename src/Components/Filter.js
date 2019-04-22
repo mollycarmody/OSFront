@@ -48,6 +48,8 @@ export class Filter extends React.Component{
       ]
     }
     this.toggle = this.toggle.bind(this);
+    this.handleClearFilter = this.handleClearFilter.bind(this);
+    this.closeDropDowns = this.closeDropDowns.bind(this);
 
 
   }
@@ -55,17 +57,29 @@ export class Filter extends React.Component{
     switch(type){
       case('space'):
         this.setState({
-          dropdownOpenSpace:!this.state.dropdownOpenSpace
+          dropdownOpenSpace:!this.state.dropdownOpenSpace,
+          dropdownOpenDate: false
         });
         break;
       case('date'):
         this.setState({
-          dropdownOpenDate:!this.state.dropdownOpenDate
+          dropdownOpenDate:!this.state.dropdownOpenDate,
+          dropdownOpenSpace: false
         });
         break;
     }
 
 
+  }
+  closeDropDowns(){
+    this.setState({
+      dropdownOpenSpace:false,
+      dropdownOpenDate: false
+    });
+  }
+  handleClearFilter(){
+    this.props.handleClearFilters();
+    this.closeDropDowns();
   }
 
   // <select value={this.props.arr} multiple={true} onChange={this.props.handleChange}>
@@ -84,7 +98,13 @@ export class Filter extends React.Component{
   //
   // );
   render(){
-    const { from, to } = this.props;
+    let { from, to, distance } = this.props;
+    console.log("from" + from);
+    console.log("to" + to);
+    console.log("distance" + distance);
+    if(distance==undefined){
+      distance='';
+    }
     const modifiers = { start: from, end: to };
 
     return(
@@ -93,18 +113,18 @@ export class Filter extends React.Component{
           <MDBNavItem>
             {this.props.filtersUsed &&
               <div className="filter-clearButton">
-                <MDBBtn onClick={this.props.handleClearFilters}>Clear filters</MDBBtn>
+                <button className="filter-button" onClick={this.handleClearFilter}>Clear filters</button>
               </div>}
           </MDBNavItem>
 
           <MDBNavItem>
             <div className="filter-spaceTypeDropdown">
             <UncontrolledDropdown isOpen={this.state.dropdownOpenSpace}>
-              <DropdownToggle onClick={()=>this.toggle('space')}>
+              <DropdownToggle tag="button" className="filter-button" onClick={()=>this.toggle('space')}>
                 SpaceType
               </DropdownToggle>
               <DropdownMenu className="filter-dropdown">
-              <select value={this.props.arr} multiple={true} onChange={this.props.handleChange}>
+              <select value={this.props.arr} multiple={true} onChange={(event)=>this.props.handleChange(event, 'spaceType')}>
                 <option value="Restaurant space">Restaurant</option>
                 <option value="Apartment space">Apartment</option>
                 <option value="Mall space">Mall</option>
@@ -122,7 +142,7 @@ export class Filter extends React.Component{
           <MDBNavItem>
             <div className="InputFromTo">
             <UncontrolledDropdown isOpen={this.state.dropdownOpenDate}>
-            <DropdownToggle onClick={()=>this.toggle('date')}>
+            <DropdownToggle tag="button" className="filter-button" onClick={()=>this.toggle('date')}>
               Date
             </DropdownToggle>
               <DropdownMenu className="filter-dropdown">
@@ -161,12 +181,27 @@ export class Filter extends React.Component{
                      fromMonth: from,
                      numberOfMonths: 1,
                    }}
-                   onDayChange={this.props.handleToChange}
+                   onDayChange={(to)=>this.props.handleToChange(to, this.to)}
                  />
                </span>
                </DropdownMenu>
               </UncontrolledDropdown>
             </div>
+          </MDBNavItem>
+
+          <MDBNavItem>
+          <button className="filter-button">
+            <MDBInput
+              id = "filter-driving"
+              label="Driving distance (minutes)"
+              value ={distance}
+              group
+              type="text"
+              onClick={this.closeDropDowns}
+              onChange = {(event)=>this.props.handleChange(event, 'distance')}
+            />
+
+            </button>
           </MDBNavItem>
         </MDBNavbar>
       </div>

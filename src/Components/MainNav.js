@@ -3,9 +3,11 @@ import 'mdbreact/dist/css/mdb.css'
 import '../Styles/MainNav.css';
 import {compose, withProps} from "recompose"
 import Map from './Map.js';
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
+import { MDBIcon, MDBDropdownToggle, MDBDropdownItem, MDBDropdownMenu, MDBDropdown, MDBFormInline, MDBInput, MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
 import CustomToggler from './CustomToggler.js';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser} from "@fortawesome/free-solid-svg-icons";
 
 //import logo from './logo.svg';
 
@@ -48,7 +50,7 @@ export class MainNav extends React.Component{
   //   </div>
   // </nav>
   handleLogin(){
-    window.location = "https://vcm-8728.vm.duke.edu:8888/login";
+    window.location = "https://rentopenspace.com/login";
     this.setState({isLoggedIn: !this.state.isLoggedIn});
   }
   handleClick(){
@@ -71,15 +73,7 @@ export class MainNav extends React.Component{
   }
   render(){
     //*ATTRIBUTE PROPS**//
-      const navButtonAttr = {
-        'className': "navbar-toggler",
-        'type': 'button',
-        'aria-label':"Toggle navigation",
-        'data-toggle':"collapse",
-        'data-target':"#navbarSupportedContent",
-         'aria-controls':"navbarSupportedContent",
-         'aria-expanded':"false"
-      };
+
 
       const searchInputAttr ={
         'className':"form-control mr-sm-2",
@@ -127,29 +121,48 @@ console.log(this.state.width);
 
            {this.state.width<767 && <CustomToggler handleClick={this.handleClick} />}
            <MDBCollapse isOpen={this.state.collapse} navbar>
-             <MDBNavbarNav left>
 
-              <MDBNavItem>
+           {this.props.showSearch &&
+           <MDBNavbarNav left>
+             <MDBNavItem>
+               <MDBFormInline waves>
+                 <div className="md-form my-0">
+                   <input className="form-control mr-sm-2" type="text" placeholder={this.props.searchVal} aria-label="Search" />
+                 </div>
+               </MDBFormInline>
+             </MDBNavItem>
+         </MDBNavbarNav>}
 
-              </MDBNavItem>
-                 {/*{this.props.showSearch && <SearchForm value = {this.props.searchVal.searchVal} formAttr = {searchFormAttr} inputAttr={searchInputAttr} buttAttr={searchButtonAttr} searchButtonLabel={searchButtonLabel}/>}*/}
-               <MDBNavItem>
-               {!this.state.isLoggedIn && <MDBNavLink to="/" onClick = {this.handleLogin}>Login with Facebook </MDBNavLink>}
-               {this.state.isLoggedIn && <MDBNavLink to="/logout" onClick = {this.handleLogin}>Logout </MDBNavLink>}
-               </MDBNavItem>
+         <MDBNavbarNav right>
 
-               <MDBNavItem>
-                 <MDBNavLink to="/BecomeAHost">Become a Host</MDBNavLink>
-               </MDBNavItem>
 
-               <MDBNavItem>
-                 <MDBNavLink to="/MeetTheTeam">About</MDBNavLink>
-               </MDBNavItem>
+             {/*{this.props.showSearch && <SearchForm value = {this.props.searchVal.searchVal} formAttr = {searchFormAttr} inputAttr={searchInputAttr} buttAttr={searchButtonAttr} searchButtonLabel={searchButtonLabel}/>}*/}
 
-               <MDBNavItem>
-                <MDBNavLink to="/Profile">Profile</MDBNavLink>
-               </MDBNavItem>
-             </MDBNavbarNav>
+           <MDBNavItem className="mainnav-item">
+             <MDBNavLink className="mainnav-link" to="/BecomeAHost">Become a Host</MDBNavLink>
+           </MDBNavItem>
+
+           <MDBNavItem className="mainnav-item">
+             <MDBNavLink  className="mainnav-link" to="/MeetTheTeam">About</MDBNavLink>
+           </MDBNavItem>
+
+
+           <MDBNavItem className="mainnav-item">
+
+           {!this.state.isLoggedIn && <MDBNavLink className="mainnav-link" to="/" onClick = {this.handleLogin}>Login with Facebook </MDBNavLink>}
+           {this.state.isLoggedIn &&
+             <MDBDropdown>
+              <MDBDropdownToggle nav caret>
+                <FontAwesomeIcon icon={faUser} />
+              </MDBDropdownToggle>
+              <MDBDropdownMenu className="dropdown-default" right>
+                <MDBDropdownItem><MDBNavLink className="mainnav-link" to="/Profile">Profile</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem><MDBNavLink className="mainnav-link" to="/logout" onClick = {this.handleLogin}>Logout </MDBNavLink></MDBDropdownItem>
+              </MDBDropdownMenu>
+            </MDBDropdown> }
+           </MDBNavItem>
+         </MDBNavbarNav>
+
            </MDBCollapse>
          </MDBNavbar>
 

@@ -186,7 +186,7 @@ export class UserProfile extends React.Component{
                   </MDBRow>
                   <MDBRow>
                       <MDBCol>
-                        <DropFile handleSaveImage = {this.handleSaveImage} imageNeeded = {this.state.imageNeeded} handleDeleteImage = {this.handleDeleteImage} handleOnDrop={this.handleOnDrop} image={this.state.image} minSize={0} maxSize={maxSize} avatarWidth={200} avatarHeight ={200} />
+                        <DropFile useAvatarEditor = {true} multiple={false} handleSaveImage = {this.handleSaveImage} imageNeeded = {this.state.imageNeeded} handleDeleteImage = {this.handleDeleteImage} handleOnDrop={this.handleOnDrop} image={this.state.image} minSize={0} maxSize={maxSize} avatarWidth={200} avatarHeight ={200} />
                       </MDBCol>
                   </MDBRow>
 

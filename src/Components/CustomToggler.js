@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 export class CustomToggler extends React.Component{
   constructor(props){
@@ -8,7 +10,7 @@ export class CustomToggler extends React.Component{
   render(){
     return(
       <span className="navbar-toggler-icon">
-          <i className="fa fa-navicon" onClick={this.props.handleClick}></i>
+          <FontAwesomeIcon onClick={this.props.handleClick} icon={faBars}/>
       </span>
     )
   }

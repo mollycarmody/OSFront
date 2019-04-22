@@ -14,6 +14,7 @@ import TermsCond from './Components/TermsCond.js';
 import Autocomplete from 'react-google-autocomplete';
 import BookPage from './Components/BookPage.js';
 import UserProfile from './Components/UserProfile.js';
+import BecomeHostPage from './Components/BecomeHostPage.js';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import {
   BrowserRouter,
@@ -64,7 +65,7 @@ class App extends Component{
                 <div className="content">
 
                   <Route exact path="/" component={FirstPage}/>
-                  <Route path="/BecomeAHost" component={HostForm}/>
+                  <Route path="/BecomeAHost" component={BecomeHostPage}/>
                   <Route path="/Listing" component={Listing}/>
                   <Route path="/Details/:id" component={Details}/>
                   <Route path="/MeetTheTeam" component={TeamPage}/>

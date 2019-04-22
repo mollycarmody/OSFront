@@ -19,7 +19,7 @@ export class DropFile extends React.Component{
     return(
       <>
       {this.props.imageNeeded &&
-      <Dropzone onDrop={this.props.handleOnDrop} accept="image/png" minSize={this.props.minSize} maxSize={this.props.maxSize}>
+      <Dropzone onDrop={this.props.handleOnDrop} accept="image/png" minSize={this.props.minSize} maxSize={this.props.maxSize} multiple ={this.props.multiple}>
         {({getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles}) => {
           const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > this.props.maxSize;
           return (
@@ -44,10 +44,10 @@ export class DropFile extends React.Component{
         }
       </Dropzone>}
 
-      {!this.props.imageNeeded &&
+      {!this.props.imageNeeded && this.props.useAvatarEditor &&
         <div>
         <MDBRow>
-          <MDBCol size="sm-6">
+          <MDBCol size="sm-6" id="dropfile-avatarCol">
             <AvatarEditor ref = {this.setEditorRef} width={this.props.avatarWidth} height={this.props.avatarHeight} image={this.props.image} />
           </MDBCol>
 
@@ -55,15 +55,20 @@ export class DropFile extends React.Component{
           <MDBCol size="sm-6" id="dropfile-bttnCol">
             <div className="bottomdiv">
             <MDBRow>
-            <MDBBtn className="dropfile-bttn" onClick={()=>this.props.handleSaveImage(this.editor)}>Save image</MDBBtn>
+              <MDBCol>
+                <MDBBtn className="dropfile-bttn" onClick={()=>this.props.handleSaveImage(this.editor)}>Save image</MDBBtn>
+              </MDBCol>
             </MDBRow>
 
             <MDBRow>
-            <MDBBtn className="dropfile-bttn" onClick={this.props.handleDeleteImage}>Delete image</MDBBtn>
+              <MDBCol>
+                <MDBBtn className="dropfile-bttn" onClick={this.props.handleDeleteImage}>Delete image</MDBBtn>
+              </MDBCol>
             </MDBRow>
             </div>
           </MDBCol>
         </MDBRow>
+
         </div>}
       </>
     );

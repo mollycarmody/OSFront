@@ -12,3 +12,6 @@
 .custom-toggler.navbar-toggler {
   border-color: rgb(255,102,203);
 }
+.mainnav-item{
+  transform: translateY(30%)
+}

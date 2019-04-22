@@ -113,10 +113,11 @@ input:focus{
 .section{
 
   width: 100%;
-  height: 100vh;
+  height: auto;
   display: inline-block;
   padding-left: 50px;
     padding-right: 50px;
+    padding-bottom: 20vh;
 
 
 }
@@ -212,18 +213,11 @@ text-align: center;
 
   #firstpage-howworksimg{
     width:80vw;
+    height: 45vw;
+    width:100%;
   }
 
   .centerBlock{
     padding-top: 0;
-  }
-}
-@media (max-width:1450px) {
-  #section2{
-    height:85vh;
-  }
-  #section3{
-    height: 65vh;
-    padding-top: 20px;
   }
 }

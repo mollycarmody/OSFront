@@ -456,7 +456,7 @@ export class BookForm extends React.Component{
                              onDayChange={this.handleFromChange}
                              required
                            />
-                      
+
                       </MDBCol>
                       <MDBCol>
 
