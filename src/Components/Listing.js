@@ -11,7 +11,6 @@ import Filter from './Filter.js';
 
 import { MDBRow, MDBCol, MDBFormInline, MDBIcon, MDBBtn } from "mdbreact";
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
-import Fullpage, { FullPageSections, FullpageSection } from 'react-fullpage';
 
 import moment from 'moment';
 import 'react-day-picker/lib/style.css';
