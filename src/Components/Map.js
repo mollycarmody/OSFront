@@ -9,8 +9,6 @@ import {
     StandaloneSearchBox,
 } from 'react-google-maps'
 import MapMarker from "./MapMarker";
-import Autocomplete from 'react-google-autocomplete';
-import Table from "./Listing";
 import * as API from '../apiActions'
 import SearchBox from "react-google-maps/lib/components/places/SearchBox";
 

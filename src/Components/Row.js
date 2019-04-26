@@ -1,6 +1,5 @@
 import React from 'react';
 import Point from './Point.js';
-import Button from './Button.js';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import { MDBCol, MDBFormInline, MDBIcon, MDBBtn } from "mdbreact";
 import '../Styles/Listing.css';

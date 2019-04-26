@@ -305,12 +305,14 @@ export class BookForm extends React.Component{
     var phoneClass='';
     var startDClass='';
     var endDClass='';
-    if((contactRadio==1) && (email==='')){
+  //  if((contactRadio==1) && (email==='')){
+    if(email===''){
       console.log("email no");
       flag=false;
       emailClass="invalid";
     }
-    if((contactRadio==2) && (phone===0||phone===null||phone===undefined)){
+    //    if((contactRadio==2) && (phone===0||phone===null||phone===undefined)){
+    if(phone===0||phone===null||phone===undefined){
       console.log("phone no");
       flag=false;
       phoneClass="invalid";
@@ -345,18 +347,18 @@ export class BookForm extends React.Component{
 
   //  const prices2 =  storeTime=='summerAndAbroad'? prices*2 : prices;
     const itemCountElements = itemTypes.map((type, index) =>{
-    let noSpace = type.replace(/\s+/g, '');
-    let countItem = noSpace+'Count';
-    return (
-      <MDBRow>
-        <CountItem count={this.state[countItem]} name={type} id={index} handleIncrement={this.handleIncrement} handleDecrement = {this.handleDecrement}/>
-        <MDBCol className="bookform-itemprice">
-          x {this.state.prices[index]}
-        </MDBCol>
-      </MDBRow>
+        let noSpace = type.replace(/\s+/g, '');
+        let countItem = noSpace+'Count';
+        return (
+          <MDBRow>
+            <CountItem count={this.state[countItem]} name={type} id={index} handleIncrement={this.handleIncrement} handleDecrement = {this.handleDecrement}/>
+            <MDBCol className="bookform-itemprice">
+              x {this.state.prices[index]}
+            </MDBCol>
+          </MDBRow>
+        );
+      }
     );
-  }
-  );
   const takenFromDates=[
     {
       after:to
@@ -383,7 +385,30 @@ export class BookForm extends React.Component{
         to:new Date(2019, 3, 13)
     }
   ];
-
+  // <MDBCol size="sm-2"><MDBInput gap onClick={this.onClick(1, "contactRadio")} checked={this.state.contactRadio===1 ? true : false} label="email" type="radio"
+  // id="radio1" /></MDBCol>
+  // <MDBCol size="sm-2"><MDBInput gap onClick={this.onClick(2, "contactRadio")} checked={this.state.contactRadio===2 ? true : false} label="phone" type="radio"
+  // id="radio2" /></MDBCol>
+  // <MDBCol size="sm-5">
+  // {this.state.contactRadio===1 && <MDBInput
+  //   className={this.state.emailClass}
+  //   onChange ={this.handleContactChange}
+  //   label="Your email *"
+  //   group
+  //   type="email"
+  //   validate
+  //   required
+  // />}
+  //
+  // {this.state.contactRadio===2 && <MDBInput
+  //   className={this.state.phoneClass}
+  //   onChange ={this.handleContactChange}
+  //   label="Your phone *"
+  //   group
+  //   type="number"
+  //   validate
+  //   required
+  // />}
 
 
     return(
@@ -399,14 +424,14 @@ export class BookForm extends React.Component{
             >
              <MDBContainer id="bookform-container">
               <div className ="bookform-content">
+                <MDBRow className="bookform-subtitleRow">
+                  <MDBCol>
+                    <h4 className="bookform-subtitle">Contact Info</h4>
+                  </MDBCol>
+                </MDBRow>
                 <MDBRow>
-                  <MDBCol size="sm-3"><div className="bookform-label"> Preferred form of contact: </div></MDBCol>
-                  <MDBCol size="sm-2"><MDBInput gap onClick={this.onClick(1, "contactRadio")} checked={this.state.contactRadio===1 ? true : false} label="email" type="radio"
-                  id="radio1" /></MDBCol>
-                  <MDBCol size="sm-2"><MDBInput gap onClick={this.onClick(2, "contactRadio")} checked={this.state.contactRadio===2 ? true : false} label="phone" type="radio"
-                  id="radio2" /></MDBCol>
-                  <MDBCol size="sm-5">
-                  {this.state.contactRadio===1 && <MDBInput
+                  <MDBCol>
+                 <MDBInput
                     className={this.state.emailClass}
                     onChange ={this.handleContactChange}
                     label="Your email *"
@@ -414,9 +439,11 @@ export class BookForm extends React.Component{
                     type="email"
                     validate
                     required
-                  />}
+                  />
+                  </MDBCol>
 
-                  {this.state.contactRadio===2 && <MDBInput
+                  <MDBCol>
+                  <MDBInput
                     className={this.state.phoneClass}
                     onChange ={this.handleContactChange}
                     label="Your phone *"
@@ -424,21 +451,21 @@ export class BookForm extends React.Component{
                     type="number"
                     validate
                     required
-                  />}
+                  />
                   </MDBCol>
                 </MDBRow>
 
-                <MDBRow>
-                  <MDBCol size="sm-4">
-                    <div className="bookform-label">Dates to be stored</div>
+                <MDBRow className="bookform-subtitleRow">
+                  <MDBCol>
+                    <h4 className="bookform-subtitle">Dates to Store</h4>
                   </MDBCol>
-
+                </MDBRow>
+                <MDBRow>
                   <MDBCol>
 
-                    <div className="InputFromTo">
+
 
                       <MDBCol>
-
                            <DayPickerInput
                              value={from}
                              placeholder="From"
@@ -460,8 +487,6 @@ export class BookForm extends React.Component{
                       </MDBCol>
                       <MDBCol>
 
-                         <span className="InputFromTo-to">
-                           <div className={this.state.endDClass}>
                              <DayPickerInput
                              className={this.state.endDClass}
                                ref={el => (this.to = el)}
@@ -481,16 +506,15 @@ export class BookForm extends React.Component{
                                onDayChange={this.handleToChange}
                                required
                              />
-                            </div>
-                         </span>
+
                       </MDBCol>
 
-                    </div>
+                
 
                     </MDBCol>
                 </MDBRow>
 
-                <MDBRow>
+                <MDBRow className="bookform-subtitleRow">
                   <MDBCol>
                     {itemCountElements}
                   </MDBCol>
@@ -501,7 +525,7 @@ export class BookForm extends React.Component{
                   <MDBCol size="sm-4"> {this.state.priceEstimate}</MDBCol>
                 </MDBRow>
 
-                <MDBRow>
+                <MDBRow className="bookform-subtitleRow">
                   <MDBCol>
                   <div className="bookform-label">Venmo Handle (for future payment reference). </div>
                   <div className="bookform-sublabel">This information will remain private and we will not make Venmo charges until the booking is confirmed.</div>
@@ -515,7 +539,7 @@ export class BookForm extends React.Component{
                     />
                   </MDBCol>
                 </MDBRow>
-                <MDBRow>
+                <MDBRow className="bookform-subtitleRow">
                   <MDBCol><h4>Additional information about your storage needs</h4></MDBCol>
                 </MDBRow>
                 <MDBRow>
@@ -524,11 +548,12 @@ export class BookForm extends React.Component{
                   </MDBCol>
                 </MDBRow>
               </div>
-              <div className ="bookform-submit">
-                  <MDBBtn outline color="secondary" type="submit">
-                    Send
-                  </MDBBtn>
-              </div>
+
+              <MDBRow className="bookform-buttonRow">
+                <MDBCol>
+                  <MDBBtn className="bookform-button" type="submit">Submit</MDBBtn>
+                </MDBCol>
+              </MDBRow>
 
               </MDBContainer>
             </form>

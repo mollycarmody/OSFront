@@ -1,5 +1,4 @@
 import React from 'react';
-import Popup from './Popup.js';
 import { MDBView, MDBMask, MDBContainer, MDBRow, MDBCol, MDBFormInline, MDBIcon, MDBBtn } from "mdbreact";
 import '../Styles/MeetTeam.css';
 

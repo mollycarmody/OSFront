@@ -1,44 +1,60 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# OpenSpace
+To run, use navigate to master folder in terminal and run npm start
 
-In the project directory, you can run:
 
-### `npm start`
+## Group Contributions
+### Molly
+Molly worked primarily on the frontend of the app - the piece that the user sees. These included the following UIs: first page, listings page, details page, become a host form, bookings form, about pages, contact page, login/logout, user profile, and filtering/search abilities.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Timmy
+Timmy set up the MySQL database. He also built the Django Rest Framework, represented object oriented data using a REST API using JSON. He also worked with the integration library with Axios, making REST API calls to backend in Javascript with Axios. He configured and deployed backend to AWS on Apache Webserver. Finally, he also configured deployed frontend to AWS with npm build.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Kaitlyn
+During the semester, Kaitlyn contributed by working with and “specializing” in learning the Google Maps API. She worked on maps with different functionalities. For example, she created a multiple marker map with clickable info windows that displayed information and another that returned the place ID based on an address typed in to the search bar. She worked alongside Timmy to implement POST commands from backend database using the REST API to get place data for markers. Finally, she also worked on the UI/UX of the website through pilot testing of the website and wireframing.
 
-### `npm test`
+## References
+* Google Maps API
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Backend Specific
+* django
+* django-cors-headers
+* django-extensions
+* django-webpack-loader
+* djangorestframework
+* djangorestframework-stubs
+* drf-extensions
+* social-auth-app-django
+* social-auth-core
+* urllib3
+* googlemaps
 
-### `npm run build`
+### Frontend Specific
+* fontawesome dependencies
+* material-ui dependencies
+* axios + axios-rest-client
+* bootstrap
+* mbbreact
+* moment
+* npm
+* react
+* react-avatar-editor
+* react-bootstrap
+* react-day-picker
+* react-dom
+* react-dropzone
+* react-google-maps
+* react-grid-gallery
+* react-moment
+* react-router-dom
+* react-scripts
+* react-select-box
+* react-smart-sections
+* react-social-icons
+* react-ui-cards
+* reactstrap
+* slick-carousel
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Tutorials
+* [Codecademy for React](https://www.codecademy.com/learn/react-101)

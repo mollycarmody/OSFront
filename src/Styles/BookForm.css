@@ -1,16 +1,4 @@
-.toggleinfo-title{
-  margin:0;
-  padding-top:20px;
-  padding-bottom:20px;
-  color:black;
-  font-size: 12px;
-  text-align: left;
 
-}
-
-.toggleinfo-content{
-  padding: 0;
-}
 .bookform-content{
   padding-top: 30px;
   padding-bottom: 30px;
@@ -19,7 +7,6 @@
     position: relative;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
-
 
 }
 #bookform-states.form-control{
@@ -39,6 +26,23 @@
   text-align: center;
   margin:20px;
 }
+
+.bookform-subtitleRow{
+  margin-top: 30px;
+}
+.bookform-buttonRow{
+  text-align: center;
+  width: 100%;
+}
+.bookform-button{
+  border-radius: 20px;
+}
+.bookform-subdescription{
+  font:12px;
+}
+
+
+
 
 .InputFromTo .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
     background-color: #f0f8ff !important;

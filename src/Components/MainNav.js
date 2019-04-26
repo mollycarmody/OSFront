@@ -9,13 +9,8 @@ import CustomToggler from './CustomToggler.js';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser} from "@fortawesome/free-solid-svg-icons";
 
-//import logo from './logo.svg';
 
-import Autocomplete from 'react-google-autocomplete';
-import Button from './Button.js';
 import Icon from './Icon.js';
-import SearchForm from './SearchForm.js';
-import HostForm1 from './HostForm1.js';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 
@@ -34,21 +29,7 @@ export class MainNav extends React.Component{
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
   }
-  // <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  //   <NavLink to="/"><img className="navbar-brand" src="/OpenSpaceRevised.png" alt="OpenSpaceRevised"></img></NavLink>
-  //   <Button attr={navButtonAttr} label={navButtonLabel}/>
-  //   <div className="collapse navbar-collapse" id="navbarSupportedContent">
-  //   {this.props.showSearch &&
-  //     <ul className="navbar-nav mr-auto">
-  //     <SearchForm value = {this.props.searchVal.searchVal} formAttr = {searchFormAttr} inputAttr={searchInputAttr} buttAttr={searchButtonAttr} searchButtonLabel={searchButtonLabel}/>
-  //   </ul>}
-  //
-  //
-  //     {!this.state.isLoggedIn && <a href="/login" onClick={this.handleLogin}>Login with Facebook </a>}
-  //     {this.state.isLoggedIn && <a href ="/logout" onClick = {this.handleLogin}>Logout </a>}
-  //     <NavLink to="/BecomeAHost">{hostLabel}</NavLink>
-  //   </div>
-  // </nav>
+
   handleLogin(){
     window.location = "https://rentopenspace.com/login";
     this.setState({isLoggedIn: !this.state.isLoggedIn});
@@ -75,41 +56,10 @@ export class MainNav extends React.Component{
     //*ATTRIBUTE PROPS**//
 
 
-      const searchInputAttr ={
-        'className':"form-control mr-sm-2",
-        'type':"search",
-        'placeholder':'search',
-        'aria-label':'search'
-      }
-      console.log(searchInputAttr.placeholder);
-      const searchButtonAttr = {
-        'className':"btn btn-outline-success my-2 my-sm-0",
-        'type':"submit",
-        'id':"searchBarButton"
-      }
-      const searchFormAttr= {
-        'className':"form-inline my-2 my-lg-0"
-      }
-
-      //to add to json string file:
-      const searchButtonLabel = "Search";
-      const hostLabel = "Become a Host";
 
 console.log("new nav");
-// <Autocomplete
-// style={{
-// width: '100%',
-// height: '40px',
-// paddingLeft: '16px',
-// marginTop: '2px',
-// marginBottom: '100px'
-// }}
-// onPlaceSelected={ this.props.handlePlaceSelected }
-// types={['(regions)']}
-// googleMapURL= "https://maps.googleapis.com/maps/api/js?key=AIzaSyDbGXFv-QOejj2G8vfGj5cIuYqXjI1AhRU&"
-// />
+
 console.log(this.state.width);
-//  <SearchForm formAttr = {searchFormAttr} inputAttr={searchInputAttr} buttAttr={searchButtonAttr} searchButtonLabel={searchButtonLabel}/>
     return(
       <div>
       <header className="mainNav-header">
@@ -136,7 +86,6 @@ console.log(this.state.width);
          <MDBNavbarNav right>
 
 
-             {/*{this.props.showSearch && <SearchForm value = {this.props.searchVal.searchVal} formAttr = {searchFormAttr} inputAttr={searchInputAttr} buttAttr={searchButtonAttr} searchButtonLabel={searchButtonLabel}/>}*/}
 
            <MDBNavItem className="mainnav-item">
              <MDBNavLink className="mainnav-link" to="/BecomeAHost">Become a Host</MDBNavLink>

@@ -31,8 +31,6 @@
   text-align: center;
 }
 .number-input.number-input {
-  border: 1px solid #ced4da;
-  width: 10rem;
   border-radius: .25rem;
 }
 .number-input.number-input #countitem-button {

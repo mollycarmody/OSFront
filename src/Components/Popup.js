@@ -1,5 +1,4 @@
 import React from 'react';
-import Member from './Member.js';
 import { MDBPopover, MDBPopoverBody, MDBCol, MDBRow, MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import '../Styles/Popup.css';
 
