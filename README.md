@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 # OpenSpace
-To run, navigate to master folder in terminal and run npm start
+To run, use navigate to master folder in terminal and run npm start
 
 
 ## Group Contributions
@@ -51,6 +51,7 @@ During the semester, Kaitlyn contributed by working with and “specializing” 
 * react-scripts
 * react-select-box
 * react-smart-sections
+* smart-sections
 * react-social-icons
 * react-ui-cards
 * reactstrap
