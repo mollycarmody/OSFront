@@ -1,6 +1,8 @@
 
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
-
+.md-form.form-group{
+  width:100%;
+}
 .toggleinfo-title{
   text-align: center;
 }
@@ -70,6 +72,7 @@
 }
 .md-form label, input{
   font-size: 12px;
+  width:100%;
 }
 
 input{
@@ -159,9 +162,6 @@ footer.page-footer a{
 text-align: center;
 }
 
-@media (max-width: 900px){
-
-}
 
 @media (max-width: 575px){
 /* .meetTeam-main{
@@ -186,6 +186,7 @@ text-align: center;
   }
   .md-form label, input{
     font-size: 3vw;
+    width:100%;
   }
   input, input[type=text].form-control{
     height:30px;
@@ -197,6 +198,7 @@ text-align: center;
   }
   .form-control{
     height:30px;
+    width:100%;
   }
   #firstpage-filterBtn{
     text-align: center;
