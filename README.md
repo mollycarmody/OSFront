@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 # OpenSpace
-To run, use navigate to master folder in terminal and run npm start
+To run, navigate to master folder in terminal and run npm start
 
 
 ## Group Contributions
