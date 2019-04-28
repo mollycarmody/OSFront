@@ -16,7 +16,7 @@ export class AddressForm extends React.Component{
               onChange={(event)=>this.props.handleChange(event, 'street')}
               label="Street Address (include APT, etc)"
               group
-              type="number"
+              type="text"
               validate
               required
             />

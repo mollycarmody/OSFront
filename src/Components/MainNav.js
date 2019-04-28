@@ -59,7 +59,7 @@ export class MainNav extends React.Component{
   render(){
     //*ATTRIBUTE PROPS**//
 
-
+//{this.props.location.pathname}
 
 console.log("new nav");
 
@@ -102,7 +102,7 @@ console.log(this.state.width);
 
            <MDBNavItem className="mainnav-item">
 
-           {!this.state.isLoggedIn && <MDBNavLink className="mainnav-link" to={this.props.location.pathname} onClick = {this.handleLogin}>Login with Facebook </MDBNavLink>}
+           {!this.state.isLoggedIn && <MDBNavLink className="mainnav-link" to="/" onClick = {this.handleLogin}>Login with Facebook </MDBNavLink>}
            {this.state.isLoggedIn &&
              <MDBDropdown>
               <MDBDropdownToggle nav caret>

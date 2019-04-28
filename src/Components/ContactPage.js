@@ -59,6 +59,7 @@ export class ContactPage extends React.Component{
     }
     if(flag){
       console.log('you can submit!');
+      window.location = "https://rentopenspace.com/";
 
     }else{
       console.log("there were errors!");

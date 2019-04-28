@@ -65,6 +65,7 @@ export class BecomeHost extends React.Component{
   }
   handleSubmit(){
     console.log("submit!");
+    window.location = "https://rentopenspace.com/";
   }
   render(){
     var uploadedImages = this.state.spaceImages.map((image, index)=>
@@ -124,7 +125,7 @@ export class BecomeHost extends React.Component{
                     onChange={(event)=>this.handleChange(event, 'phone')}
                     label="Phone"
                     group
-                    type="tel"
+                    type="number"
                     validate
                     required
                   />

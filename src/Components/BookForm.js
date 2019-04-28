@@ -24,7 +24,6 @@ export class BookForm extends React.Component{
       showBox:false,
       showOther:false,
       showBike: false,
-      showLargeBox:false,
       showSmallFurniture:false,
       showLargeFurniture:false,
       from: undefined,
@@ -33,7 +32,6 @@ export class BookForm extends React.Component{
       endD: '',
       BoxCount:0,
       BikeCount:0,
-      LargeBoxCount:0,
       SmallFurnitureCount:0,
       LargeFurnitureCount:0,
       TVCount:0,
@@ -426,9 +424,7 @@ export class BookForm extends React.Component{
             <h4>Please fill out the form below to submit a booking request. We will follow up as soon as possible to confirm the booking and setup details for payment, delivery, etc.</h4>
           </div>
           <MDBRow>
-            <form onSubmit={this.hSubmit}
-              noValidate
-            >
+            <form onSubmit={this.hSubmit}>
              <MDBContainer id="bookform-container">
               <div className ="bookform-content">
                 <MDBRow className="bookform-subtitleRow">
@@ -523,6 +519,11 @@ export class BookForm extends React.Component{
 
                 <MDBRow className="bookform-subtitleRow">
                   <MDBCol>
+                    <h4>Item Count</h4>
+                  </MDBCol>
+                </MDBRow>
+                <MDBRow className="bookform-itemcount">
+                  <MDBCol>
                     {itemCountElements}
                   </MDBCol>
                 </MDBRow>
@@ -534,8 +535,8 @@ export class BookForm extends React.Component{
 
                 <MDBRow className="bookform-subtitleRow">
                   <MDBCol>
-                  <div className="bookform-label">Venmo Handle (for future payment reference). </div>
-                  <div className="bookform-sublabel">This information will remain private and we will not make Venmo charges until the booking is confirmed.</div>
+                  <div className="bookform-label"><h4>Venmo Handle (for future payment reference). </h4></div>
+                  <div className="bookform-sublabel"><h6>This information will remain private and we will not make Venmo charges until the booking is confirmed.</h6></div>
                     <MDBInput
                       onChange ={this.handleVenmoChange}
                       label="@john-smith2"
