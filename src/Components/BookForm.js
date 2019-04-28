@@ -281,14 +281,21 @@ export class BookForm extends React.Component{
       listing:{
         id: this.props.id
       },
-      price: '$5.00',
-      booked_space: 100,
+      num_boxes: this.state.BoxCount,
+      num_large_furniture: this.state.LargeFurnitureCount,
+      num_small_furniture: this.state.SmallFurnitureCount,
+      num_tvs: this.state.TVCount,
+      num_couches: this.state.CouchCount,
+      num_suitcases: this.state.SuitcaseCount,
+      num_mini_fridges: this.state.MiniFridgeCount,
+      num_mopeds: this.state.MopedCount,
+      num_bikes: this.state.BikeCount,
       start_date: this.state.startD,
       end_date: this.state.endD,
       additional_instructions: this.state.note,
       //confirmed:false,
       //booker: "mollycarmody"
-    }
+    };
     Api.Bookings.create(data, response =>{
       console.log("post attempt");
       console.log(response);
@@ -509,7 +516,7 @@ export class BookForm extends React.Component{
 
                       </MDBCol>
 
-                
+
 
                     </MDBCol>
                 </MDBRow>

@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const API_BASE_URL = 'rentopenspace.com/';
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.withCredentials = true;
+
+const API_BASE_URL = 'https://rentopenspace.com/api/';
 
 function handleResponse(response, callback) {
     return response.data ? callback(response.data) : console.error(response)

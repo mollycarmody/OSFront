@@ -283,7 +283,7 @@ export class FirstPage extends React.Component{
           </MDBCol>
 
           <MDBCol size="sm-5" id="firstpage-howworksimgCol">
-            <img id="firstpage-howworksimg" src="/HowWorksBlue.png" width="320"/>
+            <img id="firstpage-howworksimg" src="/static/res/HowWorksBlue.png" width="320"/>
           </MDBCol>
         </MDBRow>
       </MDBContainer>

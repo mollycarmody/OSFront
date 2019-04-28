@@ -11,7 +11,7 @@ import { faUser} from "@fortawesome/free-solid-svg-icons";
 
 
 import Icon from './Icon.js';
-import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import { withRouter, BrowserRouter, Route, NavLink } from 'react-router-dom';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 
 export class MainNav extends React.Component{
@@ -29,11 +29,15 @@ export class MainNav extends React.Component{
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
   }
+  handleLogin() {
+          window.location = "https://rentopenspace.com/login?next=" + this.props.location.pathname;
+          // this.setState({isLoggedIn: !this.state.isLoggedIn});
+      }
 
-  handleLogin(){
-    window.location = "https://rentopenspace.com/login";
-    this.setState({isLoggedIn: !this.state.isLoggedIn});
+  handleLogout() {
+      window.location = "https://rentopenspace.com/logout";
   }
+
   handleClick(){
     this.setState({
       collapse: !this.state.collapse,
@@ -66,7 +70,7 @@ console.log(this.state.width);
 
          <MDBNavbar color="transparent" expand="md" scrolling transparent>
            <NavLink to="/">
-            <img className="navbar-brand" src="/OpenSpaceRevised.png" alt="OpenSpaceRevised"/>
+             <img className="navbar-brand" src="/static/res/OpenSpaceRevised.png" alt="OpenSpaceRevised"/>
            </NavLink>
 
            {this.state.width<767 && <CustomToggler handleClick={this.handleClick} />}
@@ -98,7 +102,7 @@ console.log(this.state.width);
 
            <MDBNavItem className="mainnav-item">
 
-           {!this.state.isLoggedIn && <MDBNavLink className="mainnav-link" to="/" onClick = {this.handleLogin}>Login with Facebook </MDBNavLink>}
+           {!this.state.isLoggedIn && <MDBNavLink className="mainnav-link" to={this.props.location.pathname} onClick = {this.handleLogin}>Login with Facebook </MDBNavLink>}
            {this.state.isLoggedIn &&
              <MDBDropdown>
               <MDBDropdownToggle nav caret>

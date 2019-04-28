@@ -3,17 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {
-  BrowserRouter,
-  Route,
-  NavLink,
-  HashRouter
+    BrowserRouter,
+    Route,
+    NavLink,
+    HashRouter
 } from "react-router-dom";
 
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
+// ReactDOM.render(
+//     <BrowserRouter>
+//         <div><h1>Hello World!</h1>
+//             <div>test test test</div>
+//         </div>
+//     </BrowserRouter>
+//     , document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.register();
+ReactDOM.render(<App />, document.getElementById('root'));
+
+// // If you want your app to work offline and load faster, you can change
+// // unregister() to register() below. Note this comes with some pitfalls.
+// // Learn more about service workers: http://bit.ly/CRA-PWA
+// serviceWorker.register();
