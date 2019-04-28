@@ -42,6 +42,7 @@ export class FirstPage extends React.Component{
     this.formatDates = this.formatDates.bind(this);
     this.handleLearnMore = this.handleLearnMore.bind(this);
   }
+
   handleChange(event, type){
     console.log(event.target.value);
     console.log(type);
